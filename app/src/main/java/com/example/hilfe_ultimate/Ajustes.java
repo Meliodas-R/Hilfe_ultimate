@@ -17,6 +17,8 @@ public class Ajustes extends AppCompatActivity {
 
     View view;
 
+    //Comentario de prueba
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
