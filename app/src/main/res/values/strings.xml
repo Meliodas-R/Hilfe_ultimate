@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Hilfe</string>
+    <string name="title_activity_ajustes">Ajustes</string>
+
+    <!--    &lt;!&ndash; Preference Titles &ndash;&gt;-->
+    <!--    <string name="messages_header">Messages</string>-->
+    <!--    <string name="sync_header">Sync</string>-->
+
+    <!--    &lt;!&ndash; Messages Preferences &ndash;&gt;-->
+    <!--    <string name="signature_title">Your signature</string>-->
+    <!--    <string name="reply_title">Default reply action</string>-->
+
+    <!--    &lt;!&ndash; Sync Preferences &ndash;&gt;-->
+    <!--    <string name="sync_title">Sync email periodically</string>-->
+    <!--    <string name="attachment_title">Download incoming attachments</string>-->
+    <!--    <string name="attachment_summary_on">Automatically download attachments for incoming emails-->
+    <!--    </string>-->
+    <!--    <string name="attachment_summary_off">Only download attachments when manually requested</string>-->
+
+    <!--Seccion datos personales-->
+    <string name="seccion_datos_personales">Datos personales</string>
+    <string name="nombre_usuario">Nombre</string>
+    <string name="apellido_usuario">Apellido</string>
+    <string name="direccion_usuario">Direccion</string>
+
+    <!--Seccion preferencias de tema-->
+    <string name="seccion_preferencias_tema">Preferencias de tema</string>
+    <string name="tipo_tema">Tema oscuro</string>
+
+    <!--Seccion contacto desarrollador-->
+    <string name="contacto_desarrollador">Contacto con el desarrollador</string>
+
+</resources>

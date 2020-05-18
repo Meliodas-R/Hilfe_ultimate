@@ -1,0 +1,19 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--Tema nocturno/oscuro-->
+    <style name="Oscuro" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/Azul_celeste</item>
+        <item name="colorPrimaryDark">@color/MoradoPrimario</item>
+        <item name="colorAccent">@color/VerdeSecundario</item>
+        <item name="background">@color/Gris_oscuro</item>
+    </style>
+
+</resources>
