@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 //        boolean sync = preferences.getBoolean("Tema",false);
 //        Toast.makeText(getApplicationContext(), sync + "", Toast.LENGTH_SHORT).show();
-
-        String nombreFirma = preferences.getString("Nombre","");
-        Toast.makeText(this, nombreFirma, Toast.LENGTH_SHORT).show();
+//
+//        String nombreFirma = preferences.getString("Nombre","");
+//        Toast.makeText(this, nombreFirma, Toast.LENGTH_SHORT).show();
 
     }
 

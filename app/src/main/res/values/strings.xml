@@ -1,21 +1,10 @@
 <resources>
+    <!--Strings varios-->
     <string name="app_name">Hilfe</string>
     <string name="title_activity_ajustes">Ajustes</string>
 
-    <!--    &lt;!&ndash; Preference Titles &ndash;&gt;-->
-    <!--    <string name="messages_header">Messages</string>-->
-    <!--    <string name="sync_header">Sync</string>-->
-
-    <!--    &lt;!&ndash; Messages Preferences &ndash;&gt;-->
-    <!--    <string name="signature_title">Your signature</string>-->
-    <!--    <string name="reply_title">Default reply action</string>-->
-
-    <!--    &lt;!&ndash; Sync Preferences &ndash;&gt;-->
-    <!--    <string name="sync_title">Sync email periodically</string>-->
-    <!--    <string name="attachment_title">Download incoming attachments</string>-->
-    <!--    <string name="attachment_summary_on">Automatically download attachments for incoming emails-->
-    <!--    </string>-->
-    <!--    <string name="attachment_summary_off">Only download attachments when manually requested</string>-->
+    <!--Key dropbox-->
+    <string name="APP_KEY">lwflczpa1h5gjl3</string>
 
     <!--Seccion datos personales-->
     <string name="seccion_datos_personales">Datos personales</string>
@@ -29,5 +18,14 @@
 
     <!--Seccion contacto desarrollador-->
     <string name="contacto_desarrollador">Contacto con el desarrollador</string>
+
+    <!--Sección seguridad-->
+    <string name="seccion_seguridad">Seguridad</string>
+    <string name="consentimiento">Consentimiento</string>
+    <string name="password">Contraseña</string>
+
+    <!--Copia de seguridad/respaldo en la nube-->
+    <string name="seccion_respaldo">Copia de seguridad/reslpaldo en la nube</string>
+    <string name="respaldo">Realizar copia de seguridad</string>
 
 </resources>

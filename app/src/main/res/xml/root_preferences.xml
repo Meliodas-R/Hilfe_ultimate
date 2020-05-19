@@ -28,12 +28,36 @@
         <PreferenceScreen
             android:key="Soporte"
             android:summary="Contacte con el desarrollador para consultar dudas o reportar errores."
-            android:title="Soporte" >
+            android:title="Soporte">
             <intent
                 android:action="android.intent.action.VIEW"
                 android:targetClass="com.example.hilfe_ultimate.DeveloperContact"
                 android:targetPackage="com.example.hilfe_ultimate" />
         </PreferenceScreen>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/seccion_seguridad">
+        <Preference
+            app:enabled="true"
+            app:key="Consentimiento"
+            app:title="@string/consentimiento">
+        </Preference>
+
+        <EditTextPreference
+            app:key="Password"
+            app:title="@string/password"
+            app:useSimpleSummaryProvider="true"
+            app:enabled="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/seccion_respaldo">
+        <Preference
+            app:enabled="true"
+            app:key="Respaldo"
+            app:title="@string/respaldo">
+        </Preference>
     </PreferenceCategory>
 
 </PreferenceScreen>
