@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
@@ -19,10 +20,6 @@ import java.io.File;
 
 
 public class Ajustes extends AppCompatActivity {
-
-    //Comentario de prueba
-//    static final String inFileName = "/data/data/com.example.hilfe_ultimate/databases/bd.db";
-//    static File dbFile = new File(inFileName);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +35,25 @@ public class Ajustes extends AppCompatActivity {
         }
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        boolean sync = preferences.getBoolean("Tema",false);
+        //boolean sync = preferences.getBoolean("Tema", false);
+
+        String sync = preferences.getString("Metodo", "");
+        Toast.makeText(this, sync, Toast.LENGTH_SHORT).show();
+
+        if (sync.equals("SMS")) {
+            MainActivity.var = 1;
+
+        }
+
+        if (sync.equals("Correo electrónico")) {
+            MainActivity.var = 2;
+
+        }
+
+        if (sync.equals("Llamada")) {
+            MainActivity.var = 3;
+
+        }
 
     }
 
@@ -71,7 +86,7 @@ public class Ajustes extends AppCompatActivity {
                                     Toast.makeText(getActivity(), "Se ha generado un respaldo de la base de datos.", Toast.LENGTH_SHORT).show();
                                 }
                             })
-                            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener(){
+                            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     Toast.makeText(getActivity(), "La operacion se ha cancelado.", Toast.LENGTH_SHORT).show();
                                 }
@@ -81,16 +96,29 @@ public class Ajustes extends AppCompatActivity {
                 }
             });
 
+            ListPreference listPreference = (ListPreference) findPreference("Metodo");
             Preference preferencePass = (Preference) findPreference("Password");
             preference = (Preference) findPreference("Consentimiento");
 
-            if (preference.isEnabled()){
+            if (preference.isEnabled()) {
                 preferencePass.setEnabled(true);
-            }else{
+            } else {
                 preferencePass.setEnabled(false);
             }
 
 
+//            if (listPreference.getValue().equals("SMS")) {
+//                MainActivity.var = 1;
+//
+//            }
+//            if (listPreference.getValue().equals("Correo electronico")) {
+//                MainActivity.var = 2;
+//            }
+//
+//
+//            if (listPreference.getValue().equals("Llamada")) {
+//                MainActivity.var = 3;
+//            }
 
         }
 

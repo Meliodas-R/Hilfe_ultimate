@@ -42,14 +42,14 @@
         <SwitchPreference
             app:defaultValue="false"
             app:key="Consentimiento"
-            app:title="@string/consentimiento">
+            app:title="@string/consentimiento_string">
 
         </SwitchPreference>
 
         <EditTextPreference
             app:key="Password"
             app:title="@string/password"
-            app:dependency="@string/consentimiento"
+            app:dependency="Consentimiento"
             app:useSimpleSummaryProvider="true"
             app:enabled="false"/>
     </PreferenceCategory>

@@ -22,41 +22,22 @@ public class MainActivity extends AppCompatActivity {
 
     Button panicButton;
     String numero2 = "684313961";
-    public static Integer var = 2;
+    public static Integer var = 3;
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//        String tipoDeAccion = SharedPreferences;
 
-        //Gestion de permisos
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.CALL_PHONE);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para realizar llamadas telefónicas.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 225);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
+        pedirPermisoLlamadas();
+        pedirPermisoSms();
+        pedirPermisoLocalizacion();
+        pedirPermisoLectura();
+        pedirPermisoEscritura();
 
-        permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.SEND_SMS);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1000);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
-
-        permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.INTERNET);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, 1001);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
 
         AdminSQLiteOpenHelper conn = new AdminSQLiteOpenHelper(this, "bd_contactos", null, 1);
 
@@ -77,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 //        boolean sync = preferences.getBoolean("Tema",false);
 //        Toast.makeText(getApplicationContext(), sync + "", Toast.LENGTH_SHORT).show();
 //
@@ -126,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que envia un correo electrónico.
+     *
+     * @param destinatario Correo electrónico al que enviar el mensaje.
+     * @param asunto Asunto del correo.
+     * @param mensaje Cuerpo del mensaje a enviar.
+     */
     private void enviarCorreo(String destinatario, String asunto, String mensaje) {
 
         Intent i = new Intent(Intent.ACTION_VIEW
@@ -146,6 +134,61 @@ public class MainActivity extends AppCompatActivity {
                 PackageManager.PERMISSION_GRANTED)
             return;
         startActivity(i);
+    }
+
+    private void pedirPermisoLlamadas(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.CALL_PHONE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para realizar llamadas telefónicas.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 225);
+        } else {
+            Log.i("Mensaje", "Se tiene permiso!");
+        }
+    }
+
+    private void pedirPermisoSms(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.SEND_SMS);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1000);
+        } else {
+            Log.i("Mensaje", "Se tiene permiso!");
+        }
+    }
+
+    private void pedirPermisoLocalizacion(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
+        } else {
+            Log.i("Mensaje", "Se tiene permiso!");
+        }
+    }
+
+    private void pedirPermisoLectura(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1002);
+        } else {
+            Log.i("Mensaje", "Se tiene permiso!");
+        }
+    }
+
+    private void pedirPermisoEscritura(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1003);
+        } else {
+            Log.i("Mensaje", "Se tiene permiso!");
+        }
     }
 
 }

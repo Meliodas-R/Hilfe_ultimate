@@ -21,8 +21,9 @@
 
     <!--Sección seguridad-->
     <string name="seccion_seguridad">Seguridad</string>
-    <string name="consentimiento">Consentimiento</string>
+    <string name="consentimiento_string">Activar funciones de autenticacion.</string>
     <string name="password">Contraseña</string>
+    <string name="consentimiento_summary">Se activará la opcion contraseña.</string>
 
     <!--Copia de seguridad/respaldo en la nube-->
     <string name="seccion_respaldo">Copia de seguridad/reslpaldo en la nube</string>

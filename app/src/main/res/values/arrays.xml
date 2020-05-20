@@ -1,13 +1,13 @@
 <resources>
     <string-array name="valores_respuesta">
-        <item>Llamada</item>
-        <item>Correo electrónico</item>
         <item>SMS</item>
+        <item>Correo electrónico</item>
+        <item>Llamada</item>
     </string-array>
 
     <string-array name="valores_respuesta_values">
-        <item>Llamada</item>
-        <item>Correo electrónico</item>
         <item>SMS</item>
+        <item>Correo electrónico</item>
+        <item>Llamada</item>
     </string-array>
 </resources>
