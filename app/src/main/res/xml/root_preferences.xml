@@ -39,15 +39,17 @@
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/seccion_seguridad">
-        <Preference
-            app:enabled="true"
+        <SwitchPreference
+            app:defaultValue="false"
             app:key="Consentimiento"
             app:title="@string/consentimiento">
-        </Preference>
+
+        </SwitchPreference>
 
         <EditTextPreference
             app:key="Password"
             app:title="@string/password"
+            app:dependency="@string/consentimiento"
             app:useSimpleSummaryProvider="true"
             app:enabled="false"/>
     </PreferenceCategory>
@@ -56,8 +58,20 @@
         <Preference
             app:enabled="true"
             app:key="Respaldo"
+            app:summary="@string/respaldo_summary"
             app:title="@string/respaldo">
         </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/seccion_metodo_contacto">
+        <ListPreference
+            app:key="Metodo"
+            app:title="@string/seleccion_metodo"
+            app:entries="@array/valores_respuesta"
+            app:entryValues="@array/valores_respuesta_values"
+            app:summary="@string/metodo_summary"
+            >
+        </ListPreference>
     </PreferenceCategory>
 
 </PreferenceScreen>

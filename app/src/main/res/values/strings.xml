@@ -27,5 +27,13 @@
     <!--Copia de seguridad/respaldo en la nube-->
     <string name="seccion_respaldo">Copia de seguridad/reslpaldo en la nube</string>
     <string name="respaldo">Realizar copia de seguridad</string>
+    <string name="respaldo_summary">Se realizará una copia de seguridad de los datos de la aplicacion para poder recuperarlos más adelante.</string>
+
+    <!--Seccion metodo de contacto-->
+    <string name="seccion_metodo_contacto">Método de contacto</string>
+    <string name="seleccion_metodo">Seleccion metodo de contacto</string>
+    <string name="metodo_summary">Aqui podrá seleccionar la manera en la que se contactará con la persona que se haya definido.</string>
+
+
 
 </resources>

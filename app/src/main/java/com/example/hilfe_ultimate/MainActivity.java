@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -21,9 +20,9 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button callButton;
-    String numero="684313961";
-    Integer var=1;
+    Button panicButton;
+    String numero2 = "684313961";
+    public static Integer var = 2;
     final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
 
     @Override
@@ -61,20 +60,18 @@ public class MainActivity extends AppCompatActivity {
 
         AdminSQLiteOpenHelper conn = new AdminSQLiteOpenHelper(this, "bd_contactos", null, 1);
 
-        //Llamada de telefono
-        callButton = (Button) findViewById(R.id.boton_perso);
-        callButton.setOnClickListener(new View.OnClickListener() {
+        panicButton = (Button) findViewById(R.id.boton_perso);
+        panicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(var==1){
-                    enviarMensaje("684313961","ELBOW DESTRUCTION");
+                if (var == 1) {
+                    enviarMensaje("684313961", "ELBOW DESTRUCTION");
                 }
-                if (var==3){
-                    Intent i= new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + numero));
-                    if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE)!=
-                            PackageManager.PERMISSION_GRANTED)
-                        return;
-                    startActivity(i);
+                if (var == 2) {
+                    enviarCorreo("aserlaredo@gmail.com","Elbow destruction","Hola amigos");
+                }
+                if (var == 3) {
+                    realizarLlamada(numero2);
                 }
 
             }
@@ -90,32 +87,66 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Método de desplazamiento entre pantallas.
+    /**
+     * Método que permite al usuario desplazarse a la ventana de opciones.
+     *
+     * @param view Representación en pantalla de los elementos pertenecientes a la vista de
+     *             opciones generales.
+     */
     public void IrOpciones(View view) {
         Intent i = new Intent(this, OpcionesGenerales.class);
         startActivity(i);
     }
 
-    //Metodo para salir de la aplicacion.
-    public void salir(View view){
+    /**
+     * Método que cierra la aplicación.
+     *
+     * @param view Representación en pantalla de los elementos.
+     */
+    public void salir(View view) {
         finish();
         System.exit(0);
     }
 
-    private void enviarMensaje(String numero, String mensaje){
+    /**
+     * Método que realiza el envío de un mensaje SMS.
+     *
+     * @param numero  Número de teléfono al que se envía el SMS.
+     * @param mensaje Texto que es enviado.
+     */
+    private void enviarMensaje(String numero, String mensaje) {
         try {
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(numero,null, mensaje, null, null);
-            Toast.makeText(getApplicationContext(),"Mensaje enviado", Toast.LENGTH_LONG).show();
+            sms.sendTextMessage(numero, null, mensaje, null, null);
+            Toast.makeText(getApplicationContext(), "Mensaje enviado", Toast.LENGTH_LONG).show();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "El mensaje no se pudo enviar", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }
 
+    private void enviarCorreo(String destinatario, String asunto, String mensaje) {
 
+        Intent i = new Intent(Intent.ACTION_VIEW
+                , Uri.parse("mailto:" + destinatario));
+        i.putExtra(Intent.EXTRA_SUBJECT, asunto);
+        i.putExtra(Intent.EXTRA_TEXT, mensaje);
+        startActivity(i);
+    }
 
+    /**
+     * Método que realiza una llamada telefónica.
+     *
+     * @param numero Número de teléfono al que contactar.
+     */
+    private void realizarLlamada(String numero) {
+        Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + numero));
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) !=
+                PackageManager.PERMISSION_GRANTED)
+            return;
+        startActivity(i);
+    }
 
 }
 

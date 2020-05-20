@@ -40,10 +40,6 @@ public class Ajustes extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         boolean sync = preferences.getBoolean("Tema",false);
 
-
-
-
-
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
@@ -51,15 +47,13 @@ public class Ajustes extends AppCompatActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
             Preference preference = (Preference) findPreference("Consentimiento");
+
             preference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 public boolean onPreferenceClick(final Preference preference) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage("Implementar esta función puede ralentizar su acceso a la aplicación, téngalo en cuenta antes de usar esta función.")
                             .setPositiveButton("Lo entiendo", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Toast.makeText(getActivity(), "Se ha activado la contraseña.", Toast.LENGTH_SHORT).show();
-                                    Preference preferencePass = (Preference) findPreference("Password");
-                                    preferencePass.setEnabled(true);
                                 }
                             });
                     builder.show();
@@ -87,6 +81,14 @@ public class Ajustes extends AppCompatActivity {
                 }
             });
 
+            Preference preferencePass = (Preference) findPreference("Password");
+            preference = (Preference) findPreference("Consentimiento");
+
+            if (preference.isEnabled()){
+                preferencePass.setEnabled(true);
+            }else{
+                preferencePass.setEnabled(false);
+            }
 
 
 
