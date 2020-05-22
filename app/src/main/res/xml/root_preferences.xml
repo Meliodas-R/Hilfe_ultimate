@@ -47,11 +47,11 @@
         </SwitchPreference>
 
         <EditTextPreference
+            app:dependency="Consentimiento"
+            app:enabled="false"
             app:key="Password"
             app:title="@string/password"
-            app:dependency="Consentimiento"
-            app:useSimpleSummaryProvider="true"
-            app:enabled="false"/>
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/seccion_respaldo">
@@ -59,19 +59,38 @@
             app:enabled="true"
             app:key="Respaldo"
             app:summary="@string/respaldo_summary"
-            app:title="@string/respaldo">
-        </Preference>
+            app:title="@string/respaldo"></Preference>
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/seccion_metodo_contacto">
         <ListPreference
-            app:key="Metodo"
-            app:title="@string/seleccion_metodo"
             app:entries="@array/valores_respuesta"
             app:entryValues="@array/valores_respuesta_values"
+            app:key="Metodo"
             app:summary="@string/metodo_summary"
-            >
+            app:title="@string/seleccion_metodo">
         </ListPreference>
+
+        <EditTextPreference
+            app:key="CorreoDefecto"
+            app:title="@string/correo_defecto"
+            app:summary="@string/correo_defecto_summary">
+        </EditTextPreference>
+
+        <EditTextPreference
+            app:key="CorreoAsunto"
+            app:title="@string/correo_asunto"
+            app:summary="@string/correo_asunto_summary"
+            >
+        </EditTextPreference>
+
+        <EditTextPreference
+            app:key="CorreoCuerpo"
+            app:title="@string/correo_cuerpo"
+            app:summary="@string/correo_cuerpo_summary"
+            >
+        </EditTextPreference>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

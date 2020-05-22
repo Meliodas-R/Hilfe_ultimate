@@ -14,6 +14,9 @@
         <item name="colorPrimaryDark">@color/MoradoPrimario</item>
         <item name="colorAccent">@color/VerdeSecundario</item>
         <item name="background">@color/Gris_oscuro</item>
+        <item name="backgroundColor">@color/Gris_oscuro</item>
+        <item name="android:background">@color/Gris_oscuro</item>
+        <item name="android:textColor">@color/MoradoPrimario</item>
     </style>
 
 </resources>

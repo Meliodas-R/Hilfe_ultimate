@@ -9,6 +9,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -17,27 +22,35 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-
+/**
+ * Clase que realiza contactos de emergencia (llamadas, correos, sms)
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
     Button panicButton;
     String numero2 = "684313961";
     public static Integer var = 3;
-    final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-//        String tipoDeAccion = SharedPreferences;
+
 
         pedirPermisoLlamadas();
         pedirPermisoSms();
         pedirPermisoLocalizacion();
         pedirPermisoLectura();
-        pedirPermisoEscritura();
+        pedr();
 
+        //drawableToBitmap(R.drawable.heart);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+        final String correoDefectoString = preferences.getString("CorreoDefecto","");
+        final String asuntoDefectoString = preferences.getString("CorreoAsunto","");
+        final String cuerpoDefectoString = preferences.getString("CorreoCuerpo","");
 
         AdminSQLiteOpenHelper conn = new AdminSQLiteOpenHelper(this, "bd_contactos", null, 1);
 
@@ -49,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     enviarMensaje("684313961", "ELBOW DESTRUCTION");
                 }
                 if (var == 2) {
-                    enviarCorreo("aserlaredo@gmail.com","Elbow destruction","Hola amigos");
+                    enviarCorreo(correoDefectoString,asuntoDefectoString,cuerpoDefectoString);
                 }
                 if (var == 3) {
                     realizarLlamada(numero2);
@@ -57,13 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-//        boolean sync = preferences.getBoolean("Tema",false);
-//        Toast.makeText(getApplicationContext(), sync + "", Toast.LENGTH_SHORT).show();
-//
-//        String nombreFirma = preferences.getString("Nombre","");
-//        Toast.makeText(this, nombreFirma, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -115,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
      * @param mensaje Cuerpo del mensaje a enviar.
      */
     private void enviarCorreo(String destinatario, String asunto, String mensaje) {
-
         Intent i = new Intent(Intent.ACTION_VIEW
                 , Uri.parse("mailto:" + destinatario));
         i.putExtra(Intent.EXTRA_SUBJECT, asunto);
@@ -136,6 +141,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    /**
+     * Método que pide permisos al usuario para poder realizar llamadas.
+     *
+     */
     private void pedirPermisoLlamadas(){
         int permissionCheck = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.CALL_PHONE);
@@ -147,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que pide permisos al usuario para poder enviar SMS.
+     *
+     */
     private void pedirPermisoSms(){
         int permissionCheck = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.SEND_SMS);
@@ -158,6 +171,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Método que pide permisos al usuario para poder acceder a la ubicacion precisa.
+     *
+     */
     private void pedirPermisoLocalizacion(){
         int permissionCheck = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -169,6 +186,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void pedr(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1003);
+        } else {
+            Log.i("Mensaje", "Se tiene permiso!");
+        }
+    }
+
+    /**
+     * Método que pide permisos al usuario para poder acceder al almacenamiento del dispositivo.
+     *
+     */
     private void pedirPermisoLectura(){
         int permissionCheck = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -180,15 +212,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void pedirPermisoEscritura(){
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1003);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
         }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
     }
 
 }

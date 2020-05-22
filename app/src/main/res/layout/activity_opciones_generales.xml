@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B9EA899A"
+    android:background="#B9FFFFFF"
     tools:context=".OpcionesGenerales">
 
     <ImageButton
@@ -75,7 +75,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginBottom="104dp"
         android:adjustViewBounds="false"
-        android:background="#FFFFFF"
+        android:background="#FFEB3B"
         android:cropToPadding="false"
         android:onClick="irAtras"
         android:src="@drawable/ic_atras_foreground"
