@@ -60,7 +60,7 @@
         android:layout_marginEnd="50dp"
         android:layout_marginRight="50dp"
         android:background="#AAFF9800"
-        android:onClick="irNosedonde"
+        android:onClick="irAjustes"
         android:src="@drawable/ic_ajustes_foreground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ibContactos"

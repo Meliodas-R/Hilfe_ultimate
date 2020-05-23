@@ -106,20 +106,6 @@ public class Ajustes extends AppCompatActivity {
                 preferencePass.setEnabled(false);
             }
 
-
-//            if (listPreference.getValue().equals("SMS")) {
-//                MainActivity.var = 1;
-//
-//            }
-//            if (listPreference.getValue().equals("Correo electronico")) {
-//                MainActivity.var = 2;
-//            }
-//
-//
-//            if (listPreference.getValue().equals("Llamada")) {
-//                MainActivity.var = 3;
-//            }
-
         }
 
     }

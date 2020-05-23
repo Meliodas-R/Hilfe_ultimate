@@ -61,6 +61,12 @@ public class ContactoBD {
         return listaContactos;
     }
 
+    /**
+     * Método que elimina un contacto.
+     *
+     * @param id Identificador del contacto.
+     * @return Número de registros eliminados.
+     */
     public long eliminarContacto(Integer id){
         abrirBD();
         long registro=0;
@@ -68,6 +74,21 @@ public class ContactoBD {
         cerrarBD();
         return registro;
     }
+
+//    /**
+//     * Método que modifica un contacto.
+//     *
+//     * @param id Identificador del elemento.
+//     * @return Número de registros modificados.
+//     */
+//    public long modificarContacto(Integer id){
+//        abrirBD();
+//        long registro=0;
+//        registro = bd.update("CONTACTO","ID_CONTACTO=" + id, null);
+//        cerrarBD();
+//        return registro;
+//
+//    }
 
 
 }

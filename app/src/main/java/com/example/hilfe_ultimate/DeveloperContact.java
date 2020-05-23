@@ -24,6 +24,8 @@ public class DeveloperContact extends AppCompatActivity {
         etMensaje = findViewById(R.id.etMensaje);
         btnEnviar = findViewById(R.id.btnEnviar);
 
+        etDestinatario.setText("ehj.development@gmail.com");
+
         btnEnviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

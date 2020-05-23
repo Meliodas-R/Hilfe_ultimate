@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
 
+/**
+ * Clase que muestra una animación al iniciar el aplicativo.
+ *
+ */
 public class Splash extends AppCompatActivity {
 
     @Override

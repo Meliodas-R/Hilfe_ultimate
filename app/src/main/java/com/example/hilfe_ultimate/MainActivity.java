@@ -1,5 +1,6 @@
 package com.example.hilfe_ultimate;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -9,48 +10,38 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 /**
  * Clase que realiza contactos de emergencia (llamadas, correos, sms)
- *
  */
 public class MainActivity extends AppCompatActivity {
 
     Button panicButton;
     String numero2 = "684313961";
     public static Integer var = 3;
+    public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        pedirPermisoLlamadas();
-        pedirPermisoSms();
-        pedirPermisoLocalizacion();
-        pedirPermisoLectura();
-        pedr();
-
-        //drawableToBitmap(R.drawable.heart);
-
+        pedirPermisos();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
-        final String correoDefectoString = preferences.getString("CorreoDefecto","");
-        final String asuntoDefectoString = preferences.getString("CorreoAsunto","");
-        final String cuerpoDefectoString = preferences.getString("CorreoCuerpo","");
+        final String correoDefectoString = preferences.getString("CorreoDefecto", "");
+        final String asuntoDefectoString = preferences.getString("CorreoAsunto", "");
+        final String cuerpoDefectoString = preferences.getString("CorreoCuerpo", "");
 
         AdminSQLiteOpenHelper conn = new AdminSQLiteOpenHelper(this, "bd_contactos", null, 1);
 
@@ -62,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     enviarMensaje("684313961", "ELBOW DESTRUCTION");
                 }
                 if (var == 2) {
-                    enviarCorreo(correoDefectoString,asuntoDefectoString,cuerpoDefectoString);
+                    enviarCorreo(correoDefectoString, asuntoDefectoString, cuerpoDefectoString);
                 }
                 if (var == 3) {
                     realizarLlamada(numero2);
@@ -117,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
      * Método que envia un correo electrónico.
      *
      * @param destinatario Correo electrónico al que enviar el mensaje.
-     * @param asunto Asunto del correo.
-     * @param mensaje Cuerpo del mensaje a enviar.
+     * @param asunto       Asunto del correo.
+     * @param mensaje      Cuerpo del mensaje a enviar.
      */
     private void enviarCorreo(String destinatario, String asunto, String mensaje) {
         Intent i = new Intent(Intent.ACTION_VIEW
@@ -142,99 +133,36 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que pide permisos al usuario para poder realizar llamadas.
+     * Método que realiza la petición de todos los permisos necesarios para que la app funcione.
      *
      */
-    private void pedirPermisoLlamadas(){
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.CALL_PHONE);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para realizar llamadas telefónicas.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 225);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
-    }
-
-    /**
-     * Método que pide permisos al usuario para poder enviar SMS.
-     *
-     */
-    private void pedirPermisoSms(){
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.SEND_SMS);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 1000);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
-    }
-
-    /**
-     * Método que pide permisos al usuario para poder acceder a la ubicacion precisa.
-     *
-     */
-    private void pedirPermisoLocalizacion(){
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1001);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
-    }
-
-    private void pedr(){
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1003);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
-    }
-
-    /**
-     * Método que pide permisos al usuario para poder acceder al almacenamiento del dispositivo.
-     *
-     */
-    private void pedirPermisoLectura(){
-        int permissionCheck = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            Log.i("Mensaje", "No se tiene permiso para emviar mensajes de texto.");
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1002);
-        } else {
-            Log.i("Mensaje", "Se tiene permiso!");
-        }
-    }
-
-    public static Bitmap drawableToBitmap (Drawable drawable) {
-        Bitmap bitmap = null;
-
-        if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
-                return bitmapDrawable.getBitmap();
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void pedirPermisos() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                + ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                + ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS)
+                + ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CALL_PHONE)) {
+                Snackbar.make(this.findViewById(android.R.id.content), "Por favor, conceda permisos para poder usar la aplicación.", Snackbar.LENGTH_INDEFINITE).setAction("Conceder", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION
+                                , Manifest.permission.SEND_SMS, Manifest.permission.CALL_PHONE}, PERMISSIONS_MULTIPLE_REQUEST);
+                    }
+                }).show();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.ACCESS_FINE_LOCATION
+                        , Manifest.permission.SEND_SMS, Manifest.permission.CALL_PHONE}, PERMISSIONS_MULTIPLE_REQUEST);
             }
-        }
-
-        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
         } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            // Código por si el permiso ya ha sido dado.
         }
-
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
     }
-
 }
+
 
 
 

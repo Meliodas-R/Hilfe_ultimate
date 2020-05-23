@@ -6,6 +6,10 @@ public class Telefono {
     private String nombreTelefono;
     private String telefonoTelefono;
 
+    /**
+     * Constructor vacío del objeto teléfono.
+     *
+     */
     public Telefono() {
     }
 

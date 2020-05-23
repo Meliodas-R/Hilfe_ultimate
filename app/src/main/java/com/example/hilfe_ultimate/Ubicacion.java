@@ -1,11 +1,15 @@
 package com.example.hilfe_ultimate;
 
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +20,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -61,17 +66,28 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
         miUbicacion();
     }
 
+    /**
+     * Método que agrega un marcador en el mapa.
+     *
+     * @param lat Latitud de la ubicación.
+     * @param lng Longitud de la ubicación.
+     */
     private void agregarMarcador(double lat, double lng) {
         LatLng coordenadas = new LatLng(this.lat, this.lng);
         CameraUpdate miUbicacion = CameraUpdateFactory.newLatLngZoom(coordenadas, 16);
         if (marcador != null) marcador.remove();
         marcador = mMap.addMarker(new MarkerOptions()
                 .position(coordenadas)
-                .title("Mi posicion actual"));
-                //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
-        mMap.animateCamera(miUbicacion);
+                .title("Mi posicion actual")
+                .icon(bitmapDescriptorFromVector(this, R.drawable.ic_person_pin)));
+                mMap.animateCamera(miUbicacion);
     }
 
+    /**
+     * Método que obtiene la ubicación del dispositivo.
+     *
+     * @param location Localización actual.
+     */
     private void actualizarUbicacion(Location location) {
         if (location != null) {
             lat = location.getLatitude();
@@ -82,6 +98,12 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
 
     LocationListener locationListener = new LocationListener() {
         //Location changed se lanza cada vez que se recibe una actualizacion de la ubicación
+
+        /**
+         * Método que actualiza la ubicación cuando se detecta un cambio en la misma.
+         *
+         * @param location Localización actual.
+         */
         @Override
         public void onLocationChanged(Location location) {
             actualizarUbicacion(location);
@@ -103,6 +125,10 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
         }
     };
 
+    /**
+     * Método que se encarga de enviar actualizaciones de la ubicación.
+     *
+     */
     private void miUbicacion() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
@@ -112,5 +138,21 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
         actualizarUbicacion(location);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,15000,0,locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,10000,0,locationListener);
+    }
+
+    /**
+     * Método que convierte un recurso en un BitMap.
+     *
+     * @param context Contexto.
+     * @param vectorResId Recurso que será transformado a BitMap.
+     * @return
+     */
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+        vectorDrawable.setBounds(0, 0, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }

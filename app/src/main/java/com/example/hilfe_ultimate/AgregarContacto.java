@@ -21,6 +21,11 @@ public class AgregarContacto extends AppCompatActivity {
         vetTelefono = (EditText) findViewById(R.id.etTelefono);
     }
 
+    /**
+     * Método que agrega un contacto a la base de datos.
+     *
+     * @param view Representación de los elementos en pantalla.
+     */
     public void agregar(View view){
         ContactoBD cbd=new ContactoBD(this);
         Contacto contacto=new Contacto();
