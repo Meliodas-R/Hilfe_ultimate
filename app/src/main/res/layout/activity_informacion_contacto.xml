@@ -37,13 +37,10 @@
         android:layout_marginTop="52dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="109dp"
         android:onClick="volver"
         android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnModificar"
-        app:layout_constraintTop_toBottomOf="@+id/etInfoTelefono"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/etInfoTelefono" />
 
     <EditText
         android:id="@+id/etInfoNombre"
@@ -75,10 +72,22 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="109dp"
+        android:onClick="modificar"
         android:text="Modificar contacto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etInfoTelefono"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:onClick="marcarComoPredeterminado"
+        android:text="Definir como predeterminado"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInfoVolver" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

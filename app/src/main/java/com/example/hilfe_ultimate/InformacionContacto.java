@@ -29,7 +29,8 @@ public class InformacionContacto extends AppCompatActivity {
     }
 
     /**
-     * Método que elimina de la base de datos el contacto seleccionado.
+     * Elimina de la base de datos el contacto seleccionado.
+     *
      * @param view Representación en pantalla de los elementos.
      */
     public void eliminar(View view) {
@@ -45,11 +46,37 @@ public class InformacionContacto extends AppCompatActivity {
     }
 
     /**
-     * Método que termina la actividad y regresa a la anterior.
+     * Modifica el contacto seleccionado.
+     *
+     * @param view Representación en pantalla de los elementos.
+     */
+    public void modificar(View view) {
+        Contacto contactoM = new Contacto();
+        contactoM.setNombreContacto(etNombreContacto.getText().toString());
+        contactoM.setTelefonoContacto(etTelefonoContacto.getText().toString());
+        ContactoBD cbd = new ContactoBD(this);
+        long registro = cbd.modificarContacto(contactoM, contacto.getIdContacto());
+        if (registro != 0) {
+            Toast.makeText(this, "Registro actualizado.", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "El registro no se ha modificado.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Termina la actividad y regresa a la anterior.
      *
      * @param view Representación en pantalla de los elementos.
      */
     public void volver(View view){
         finish();
+        Intent i=new Intent(this, Contactos.class);
+        startActivity(i);
+    }
+
+    public void marcarComoPredeterminado(View view){
+        String p= contacto.getTelefonoContacto();
+        Toast.makeText(this, p, Toast.LENGTH_SHORT).show();
+        MainActivity.numeroTelefono=p;
     }
 }

@@ -70,25 +70,28 @@ public class ContactoBD {
     public long eliminarContacto(Integer id){
         abrirBD();
         long registro=0;
-        registro = bd.delete("CONTACTO", "ID_CONTACTO= " + id, null);
+        registro = bd.delete("CONTACTO", "ID_CONTACTO = " + id, null);
         cerrarBD();
         return registro;
     }
 
-//    /**
-//     * Método que modifica un contacto.
-//     *
-//     * @param id Identificador del elemento.
-//     * @return Número de registros modificados.
-//     */
-//    public long modificarContacto(Integer id){
-//        abrirBD();
-//        long registro=0;
-//        registro = bd.update("CONTACTO","ID_CONTACTO=" + id, null);
-//        cerrarBD();
-//        return registro;
-//
-//    }
+    /**
+     * Método que modifica un contacto.
+     *
+     * @param id Identificador del elemento.
+     * @return Número de registros modificados.
+     */
+    public long modificarContacto(Contacto contacto, Integer id){
+        abrirBD();
+        long registro=0;
+        ContentValues content = new ContentValues();
+        content.put("NOMBRE_CONTACTO", contacto.getNombreContacto());
+        content.put("TELEFONO_CONTACTO", contacto.getTelefonoContacto());
+        registro = bd.update("CONTACTO", content, "ID_CONTACTO = " + id, null);
+        cerrarBD();
+        return registro;
+
+    }
 
 
 }

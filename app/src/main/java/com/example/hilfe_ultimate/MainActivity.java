@@ -26,7 +26,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
     Button panicButton;
-    String numero2 = "684313961";
+    public static String numeroTelefono = "";
     public static Integer var = 3;
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
 
@@ -42,6 +42,17 @@ public class MainActivity extends AppCompatActivity {
         final String correoDefectoString = preferences.getString("CorreoDefecto", "");
         final String asuntoDefectoString = preferences.getString("CorreoAsunto", "");
         final String cuerpoDefectoString = preferences.getString("CorreoCuerpo", "");
+        final String telefono = preferences.getString("NumeroTelefonoSmsDefecto","");
+        final String mensaje = preferences.getString("TextoSmsDefecto","");
+
+//        boolean activatedPass = preferences.getBoolean("Consentimiento",false);
+//        if (activatedPass){
+//            Toast.makeText(this, "Está activado", Toast.LENGTH_SHORT).show();
+//            Intent i=new Intent(this, Autenticacion.class);
+//            startActivity(i);
+//        }else{
+//            Toast.makeText(this, "Está desactivado", Toast.LENGTH_SHORT).show();
+//        }
 
         AdminSQLiteOpenHelper conn = new AdminSQLiteOpenHelper(this, "bd_contactos", null, 1);
 
@@ -50,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (var == 1) {
-                    enviarMensaje("684313961", "ELBOW DESTRUCTION");
+                    enviarMensaje(telefono, mensaje);
                 }
                 if (var == 2) {
                     enviarCorreo(correoDefectoString, asuntoDefectoString, cuerpoDefectoString);
                 }
                 if (var == 3) {
-                    realizarLlamada(numero2);
+                    realizarLlamada(numeroTelefono);
                 }
 
             }

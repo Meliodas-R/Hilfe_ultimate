@@ -29,17 +29,27 @@
     <string name="seccion_respaldo">Copia de seguridad/reslpaldo en la nube</string>
     <string name="respaldo">Realizar copia de seguridad</string>
     <string name="respaldo_summary">Se realizará una copia de seguridad de los datos de la aplicacion para poder recuperarlos más adelante.</string>
+    <string name="respaldo_recuperar">Restaurar datos</string>
+    <string name="respaldo_recuperar_summary">Se recuperaran los datos anteriormente respaldados.</string>
 
     <!--Seccion metodo de contacto-->
     <string name="seccion_metodo_contacto">Opciones de contacto</string>
-    <string name="seleccion_metodo">Seleccion metodo de contacto</string>
+    <string name="seleccion_metodo">Selección metodo de contacto</string>
     <string name="metodo_summary">Aqui podrá seleccionar la manera en la que se contactará con la persona que se haya definido.</string>
+
+    <!--Seccion metodo contacto: Correo electrónico-->
+    <string name="seccion_metodo_contacto_correo_titulo">Opciones de contacto: Correo</string>
     <string name="correo_defecto">Correo por defecto</string>
     <string name="correo_defecto_summary">Este será el correo electrónico por defecto al que se enviará el mensaje.</string>
     <string name="correo_asunto">Asunto por defecto</string>
     <string name="correo_asunto_summary">Este será el asunto por defecto que tendrá el correo enviado.</string>
     <string name="correo_cuerpo">Cuerpo por defecto</string>
     <string name="correo_cuerpo_summary">Este será el cuerpo por defecto que tendrá el correo enviado.</string>
+
+    <!--Sección metodo contacto: SMS-->
+    <string name="seccion_metodo_contacto_sms_titulo">Opciones método contacto: SMS</string>
+    <string name="sms_numero_defecto">Número de telefono por defecto</string>
+    <string name="sms_texto_defecto">Texto a enviar por defecto</string>
 
 
 </resources>

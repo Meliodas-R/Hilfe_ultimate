@@ -44,21 +44,37 @@ public class Contactos extends AppCompatActivity {
 
     }
 
+    /**
+     * Método que muestra todos los contactos de la base de datos.
+     *
+     */
     private void consultarListaContactos(){
         ContactoBD cdb=new ContactoBD(this);
         listaContactos=cdb.listarContactos();
 
     }
 
+    /**
+     * Método que lanza la actividad AgregarContacto.
+     *
+     * @param view Representación de la actividad AgregarContacto en pantalla .
+     */
     public void irAgregar(View view){
         Intent i=new Intent(this, AgregarContacto.class);
         startActivity(i);
     }
 
+    /**
+     * Método que refresca/actualiza la actividad actual.
+     *
+     * @param view Representacion actualizada de la actividad Contactos.
+     */
     public void refrescar(View view){
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
         overridePendingTransition(0, 0);
     }
+
+
 }

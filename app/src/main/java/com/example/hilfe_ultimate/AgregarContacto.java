@@ -26,20 +26,34 @@ public class AgregarContacto extends AppCompatActivity {
      *
      * @param view Representación de los elementos en pantalla.
      */
-    public void agregar(View view){
-        ContactoBD cbd=new ContactoBD(this);
-        Contacto contacto=new Contacto();
+    public void agregar(View view) {
+        ContactoBD cbd = new ContactoBD(this);
+        Contacto contacto = new Contacto();
         contacto.setNombreContacto(vetNombre.getText().toString());
         contacto.setTelefonoContacto(vetTelefono.getText().toString());
 
-        if (!vetNombre.getText().toString().isEmpty() && !vetTelefono.getText().toString().isEmpty()){
-            long registro=cbd.agregarContacto(contacto);
-            if (registro!=0){
+        if (!vetNombre.getText().toString().isEmpty() && !vetTelefono.getText().toString().isEmpty()) {
+            long registro = cbd.agregarContacto(contacto);
+            if (registro != 0) {
                 Toast.makeText(this, "Registro insertado", Toast.LENGTH_SHORT).show();
             }
 
-        }else{
+        } else {
             Toast.makeText(this, "Los campos nombre y telefono son obligatorios", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Método que elimina el contenido de los EditText.
+     *
+     * @param view Representacion de los elemenos en pantalla.
+     */
+    public void limpiar(View view) {
+        vetNombre.setText("");
+        vetTelefono.setText("");
+    }
+
+    public void volver(View view){
+        finish();
     }
 }

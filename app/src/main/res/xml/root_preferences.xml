@@ -16,13 +16,13 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/seccion_preferencias_tema">
-        <SwitchPreference
-            app:defaultValue="false"
-            app:key="Tema"
-            app:title="@string/tipo_tema" />
+<!--    <PreferenceCategory app:title="@string/seccion_preferencias_tema">-->
+<!--        <SwitchPreference-->
+<!--            app:defaultValue="false"-->
+<!--            app:key="Tema"-->
+<!--            app:title="@string/tipo_tema" />-->
 
-    </PreferenceCategory>
+<!--    </PreferenceCategory>-->
 
     <PreferenceCategory app:title="@string/contacto_desarrollador">
         <PreferenceScreen
@@ -59,7 +59,14 @@
             app:enabled="true"
             app:key="Respaldo"
             app:summary="@string/respaldo_summary"
-            app:title="@string/respaldo"></Preference>
+            app:title="@string/respaldo">
+        </Preference>
+        <Preference
+            app:enabled="true"
+            app:key="Recuperacion"
+            app:summary="@string/respaldo_recuperar_summary"
+            app:title="@string/respaldo_recuperar">
+        </Preference>
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/seccion_metodo_contacto">
@@ -67,31 +74,49 @@
             app:entries="@array/valores_respuesta"
             app:entryValues="@array/valores_respuesta_values"
             app:key="Metodo"
-            app:summary="@string/metodo_summary"
+
+            app:useSimpleSummaryProvider="true"
             app:title="@string/seleccion_metodo">
         </ListPreference>
 
-        <EditTextPreference
-            app:key="CorreoDefecto"
-            app:title="@string/correo_defecto"
-            app:summary="@string/correo_defecto_summary">
-        </EditTextPreference>
+        <PreferenceCategory app:title="@string/seccion_metodo_contacto_correo_titulo">
+            <EditTextPreference
+                app:key="CorreoDefecto"
+                app:useSimpleSummaryProvider="true"
+                app:title="@string/correo_defecto">
+            </EditTextPreference>
 
-        <EditTextPreference
-            app:key="CorreoAsunto"
-            app:title="@string/correo_asunto"
-            app:summary="@string/correo_asunto_summary"
-            >
-        </EditTextPreference>
+            <EditTextPreference
+                app:key="CorreoAsunto"
+                app:useSimpleSummaryProvider="true"
+                app:title="@string/correo_asunto">
+            </EditTextPreference>
 
-        <EditTextPreference
-            app:key="CorreoCuerpo"
-            app:title="@string/correo_cuerpo"
-            app:summary="@string/correo_cuerpo_summary"
-            >
-        </EditTextPreference>
+            <EditTextPreference
+                app:key="CorreoCuerpo"
+                app:useSimpleSummaryProvider="true"
+                app:title="@string/correo_cuerpo">
+            </EditTextPreference>
+        </PreferenceCategory>
+
+
 
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/seccion_metodo_contacto_sms_titulo">
+        <EditTextPreference
+            app:key="NumeroTelefonoSmsDefecto"
+            app:useSimpleSummaryProvider="true"
+            app:title="@string/sms_numero_defecto">
+        </EditTextPreference>
+
+        <EditTextPreference
+            app:key="TextoSmsDefecto"
+            app:useSimpleSummaryProvider="true"
+            app:title="@string/sms_texto_defecto">
+        </EditTextPreference>
+    </PreferenceCategory>
+
 
 </PreferenceScreen>
 
