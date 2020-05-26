@@ -1,5 +1,6 @@
 package com.example.hilfe_ultimate;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -32,6 +33,13 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table CONTACTO(ID_CONTACTO INTEGER primary key autoincrement, NOMBRE_CONTACTO text not null, TELEFONO_CONTACTO text not null)");
+        db.execSQL("insert into CONTACTO (ID_CONTACTO, NOMBRE_CONTACTO, TELEFONO_CONTACTO) values (1, 'SOS','112')");
+        db.execSQL("insert into CONTACTO (ID_CONTACTO, NOMBRE_CONTACTO, TELEFONO_CONTACTO) values (2, 'Policia','091')");
+        db.execSQL("insert into CONTACTO (ID_CONTACTO, NOMBRE_CONTACTO, TELEFONO_CONTACTO) values (3, 'Guardia civil','062')");
+        db.execSQL("insert into CONTACTO (ID_CONTACTO, NOMBRE_CONTACTO, TELEFONO_CONTACTO) values (4, 'Bomberos','085')");
+        db.execSQL("insert into CONTACTO (ID_CONTACTO, NOMBRE_CONTACTO, TELEFONO_CONTACTO) values (5, 'Emergencia medica','061')");
+        db.execSQL("insert into CONTACTO (ID_CONTACTO, NOMBRE_CONTACTO, TELEFONO_CONTACTO) values (6, 'Cruz roja','901222222')");
+        db.execSQL("insert into CONTACTO (ID_CONTACTO, NOMBRE_CONTACTO, TELEFONO_CONTACTO) values (7, 'Proteccion civil','1006')");
     }
 
     /**

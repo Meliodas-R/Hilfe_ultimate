@@ -1,8 +1,11 @@
 package com.example.hilfe_ultimate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +20,7 @@ public class InformacionContacto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion_contacto);
+        getSupportActionBar().hide();
         etNombreContacto = (EditText) findViewById(R.id.etInfoNombre);
         etTelefonoContacto = (EditText) findViewById(R.id.etInfoTelefono);
 
@@ -68,15 +72,22 @@ public class InformacionContacto extends AppCompatActivity {
      *
      * @param view Representación en pantalla de los elementos.
      */
-    public void volver(View view){
+    public void volver(View view) {
         finish();
-        Intent i=new Intent(this, Contactos.class);
+        Intent i = new Intent(this, Contactos.class);
         startActivity(i);
     }
 
-    public void marcarComoPredeterminado(View view){
-        String p= contacto.getTelefonoContacto();
-        Toast.makeText(this, p, Toast.LENGTH_SHORT).show();
-        MainActivity.numeroTelefono=p;
+    public void marcarComoPredeterminado(View view) {
+        SharedPreferences prefs =
+                getSharedPreferences("com.example.hilfe_ultimate_preferences", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("TelefonoPredeterminado", contacto.getTelefonoContacto());
+        editor.commit();
+
+        //String p = contacto.getTelefonoContacto();
+        //Toast.makeText(this,  , Toast.LENGTH_SHORT).show();
+        //MainActivity.numeroTelefono = p;
     }
 }

@@ -3,6 +3,7 @@ package com.example.hilfe_ultimate;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -20,32 +21,30 @@ public class Autenticacion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autenticacion);
+        getSupportActionBar().hide();
         SharedPreferences preferenciasAutenticacion = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        passString = preferenciasAutenticacion.getString("Password", "");
+        passString = preferenciasAutenticacion.getString("Password", " ");
         etCampoPass = (EditText) findViewById(R.id.etPass);
+        boton = (Button) findViewById(R.id.btnAcceder);
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etCampoPass.toString().equals(passString)){
-                    Toast.makeText(Autenticacion.this, "Correcto", Toast.LENGTH_SHORT).show();
+                if(etCampoPass.getText().toString().equals(passString)){
+                    MainActivity.autenticacion=false;
+                    Intent i=new Intent(Autenticacion.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+
                 }else{
-                    Toast.makeText(Autenticacion.this, "Incorrecto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Autenticacion.this, "La contraseña es incorrecta", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
-
-//    public void aaa(View view){
-//        if(etCampoPass.toString()==passString){
-//            Toast.makeText(this, "Entraste!", Toast.LENGTH_SHORT).show();
-//        }else{
-//            Toast.makeText(this, passString, Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     public void salir(View view){
         finish();
         System.exit(0);
     }
+
 }

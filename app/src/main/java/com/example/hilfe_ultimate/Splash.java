@@ -19,6 +19,7 @@ public class Splash extends AppCompatActivity {
         //Permite ocultar la actionBar (debe configurarse en values/styles)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+        getSupportActionBar().hide();
 
         new Handler().postDelayed(new Runnable() {
             @Override

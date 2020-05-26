@@ -18,16 +18,7 @@ public class OpcionesGenerales extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opciones_generales);
-    }
-
-    /**
-     * Método que lanza la actividad teléfonos.
-     *
-     * @param view Representación de la actividad teléfonos en pantalla.
-     */
-    public void irTelefonos(View view) {
-        Intent i = new Intent(this, Telefonos.class);
-        startActivity(i);
+        getSupportActionBar().hide();
     }
 
     /**
@@ -67,8 +58,11 @@ public class OpcionesGenerales extends AppCompatActivity {
      */
     public void irAtras(View view) {
         finish();
+        Intent i=new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
+    //BETA
     public void irMensajes(View view) {
         Intent i = new Intent(this, DeveloperContact.class);
         startActivity(i);

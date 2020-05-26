@@ -18,6 +18,7 @@ public class DeveloperContact extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_developer_contact);
+        getSupportActionBar().hide();
 
         etDestinatario = findViewById(R.id.etDestinatario);
         etAsunto = findViewById(R.id.etAsunto);

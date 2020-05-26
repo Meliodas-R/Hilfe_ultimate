@@ -26,8 +26,9 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
     Button panicButton;
-    public static String numeroTelefono = "";
+    //public static String numeroTelefono = "";
     public static Integer var = 3;
+    public static boolean autenticacion = true;
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
 
         pedirPermisos();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -42,17 +44,25 @@ public class MainActivity extends AppCompatActivity {
         final String correoDefectoString = preferences.getString("CorreoDefecto", "");
         final String asuntoDefectoString = preferences.getString("CorreoAsunto", "");
         final String cuerpoDefectoString = preferences.getString("CorreoCuerpo", "");
-        final String telefono = preferences.getString("NumeroTelefonoSmsDefecto","");
-        final String mensaje = preferences.getString("TextoSmsDefecto","");
+        final String telefono = preferences.getString("NumeroTelefonoSmsDefecto", "");
+        final String mensaje = preferences.getString("TextoSmsDefecto", "");
 
-//        boolean activatedPass = preferences.getBoolean("Consentimiento",false);
-//        if (activatedPass){
-//            Toast.makeText(this, "Está activado", Toast.LENGTH_SHORT).show();
-//            Intent i=new Intent(this, Autenticacion.class);
-//            startActivity(i);
-//        }else{
-//            Toast.makeText(this, "Está desactivado", Toast.LENGTH_SHORT).show();
-//        }
+        if (autenticacion) {
+            boolean activatedPass = preferences.getBoolean("Consentimiento", false);
+            if (activatedPass) {
+                Intent i = new Intent(this, Autenticacion.class);
+                startActivity(i);
+                finish();
+            }
+        }
+
+        String sync = preferences.getString("Metodo", "");
+        eleccionContacto(sync);
+
+        final String numeroTelefono = preferences.getString("TelefonoPredeterminado", "");
+        Toast.makeText(this, numeroTelefono, Toast.LENGTH_SHORT).show();
+
+
 
         AdminSQLiteOpenHelper conn = new AdminSQLiteOpenHelper(this, "bd_contactos", null, 1);
 
@@ -83,8 +93,10 @@ public class MainActivity extends AppCompatActivity {
      *             opciones generales.
      */
     public void IrOpciones(View view) {
+        finish();
         Intent i = new Intent(this, OpcionesGenerales.class);
         startActivity(i);
+
     }
 
     /**
@@ -145,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Método que realiza la petición de todos los permisos necesarios para que la app funcione.
-     *
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void pedirPermisos() {
@@ -172,6 +183,29 @@ public class MainActivity extends AppCompatActivity {
             // Código por si el permiso ya ha sido dado.
         }
     }
+
+    /**
+     *
+     *
+     * @param sync
+     */
+    private void eleccionContacto(String sync){
+
+        switch (sync) {
+            case "SMS":
+                var = 1;
+                break;
+
+            case "Correo electrónico":
+                var = 2;
+                break;
+
+            case "Llamada":
+                var = 3;
+                break;
+        }
+    }
+
 }
 
 

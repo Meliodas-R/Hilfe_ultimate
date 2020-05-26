@@ -11,15 +11,22 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 
 import java.io.File;
+import java.math.BigInteger;
+import java.util.ArrayList;
 
 
 public class Ajustes extends AppCompatActivity {
+
+    public final String SHA = "SHA-1";
+    public BigInteger shaData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,30 +37,50 @@ public class Ajustes extends AppCompatActivity {
                 .replace(R.id.settings, new SettingsFragment())
                 .commit();
         ActionBar actionBar = getSupportActionBar();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         //boolean sync = preferences.getBoolean("Tema", false);
-
         String sync = preferences.getString("Metodo", "");
-        Toast.makeText(this, sync, Toast.LENGTH_SHORT).show();
 
-        if (sync.equals("SMS")) {
-            MainActivity.var = 1;
+        switch (sync) {
+            case "SMS":
+                MainActivity.var = 1;
+                break;
 
+            case "Correo electrónico":
+                MainActivity.var = 2;
+                break;
+
+            case "Llamada":
+                MainActivity.var = 3;
+                break;
         }
 
-        if (sync.equals("Correo electrónico")) {
-            MainActivity.var = 2;
+        String hash = preferences.getString("Password", "");
 
+        byte[] inputData = hash.getBytes();
+        byte[] outputData = new byte[0];
+        try {
+            outputData = sha.encryptSHA(inputData, SHA);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        if (sync.equals("Llamada")) {
-            MainActivity.var = 3;
+        shaData= new BigInteger(1, outputData);
+        //Toast.makeText(this, shaData.toString(), Toast.LENGTH_SHORT).show();
 
-        }
+        SharedPreferences prefs =
+                getSharedPreferences("com.example.hilfe_ultimate_preferences", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("Password", shaData.toString());
+        editor.commit();
+
 
     }
 
@@ -105,6 +132,11 @@ public class Ajustes extends AppCompatActivity {
             } else {
                 preferencePass.setEnabled(false);
             }
+
+
+
+
+
 
         }
 

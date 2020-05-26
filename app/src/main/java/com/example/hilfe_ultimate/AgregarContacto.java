@@ -16,6 +16,7 @@ public class AgregarContacto extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_contacto);
+        getSupportActionBar().hide();
 
         vetNombre = (EditText) findViewById(R.id.etNombre);
         vetTelefono = (EditText) findViewById(R.id.etTelefono);

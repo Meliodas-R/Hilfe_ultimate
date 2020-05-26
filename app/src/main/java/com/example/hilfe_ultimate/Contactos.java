@@ -25,6 +25,7 @@ public class Contactos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactos);
+        getSupportActionBar().hide();
         consultarListaContactos();
         lvContactos = (ListView) findViewById(R.id.listViewContactos);
         ContactosListAdapter cla=new ContactosListAdapter(this, listaContactos);

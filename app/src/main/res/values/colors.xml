@@ -12,6 +12,10 @@
     <color name="MoradoPrimario">#bb86fc</color>
     <color name="VerdeSecundario">#03dac5</color>
 
+    <!--Colores de fondo degradado-->
+    <color name="Amarillo_degradado">#f7bc46</color>
+    <color name="Rojo_suave_degradado">#ed4463</color>
+    <color name="Rosa_degradado">#cc3174</color>
 
 
 </resources>

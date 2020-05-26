@@ -51,7 +51,8 @@
             app:enabled="false"
             app:key="Password"
             app:title="@string/password"
-            app:useSimpleSummaryProvider="true" />
+            app:useSimpleSummaryProvider="true"
+            app:defaultValue=" "/>
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/seccion_respaldo">
@@ -74,7 +75,6 @@
             app:entries="@array/valores_respuesta"
             app:entryValues="@array/valores_respuesta_values"
             app:key="Metodo"
-
             app:useSimpleSummaryProvider="true"
             app:title="@string/seleccion_metodo">
         </ListPreference>

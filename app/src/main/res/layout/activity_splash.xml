@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C2EA899A"
+    android:background="@drawable/fondo_degradado"
     tools:context=".Splash">
 
     <ImageView
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/alfa_slab_one"
         android:text="HILFE"
-        android:textColor="#B22D4059"
+        android:textColor="#99FFFFFF"
         android:textSize="100sp"
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
