@@ -1,14 +1,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory app:title="@string/seccion_datos_personales">
+
         <EditTextPreference
             app:key="Nombre"
             app:title="@string/nombre_usuario"
             app:useSimpleSummaryProvider="true" />
+
         <EditTextPreference
             app:key="Apellido"
             app:title="@string/apellido_usuario"
             app:useSimpleSummaryProvider="true" />
+
         <EditTextPreference
             app:key="Direccion"
             app:title="@string/direccion_usuario"
@@ -16,61 +19,8 @@
 
     </PreferenceCategory>
 
-<!--    <PreferenceCategory app:title="@string/seccion_preferencias_tema">-->
-<!--        <SwitchPreference-->
-<!--            app:defaultValue="false"-->
-<!--            app:key="Tema"-->
-<!--            app:title="@string/tipo_tema" />-->
-
-<!--    </PreferenceCategory>-->
-
-    <PreferenceCategory app:title="@string/contacto_desarrollador">
-        <PreferenceScreen
-            android:key="Soporte"
-            android:summary="Contacte con el desarrollador para consultar dudas o reportar errores."
-            android:title="Soporte">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetClass="com.example.hilfe_ultimate.DeveloperContact"
-                android:targetPackage="com.example.hilfe_ultimate" />
-        </PreferenceScreen>
-
-
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/seccion_seguridad">
-        <SwitchPreference
-            app:defaultValue="false"
-            app:key="Consentimiento"
-            app:title="@string/consentimiento_string">
-
-        </SwitchPreference>
-
-        <EditTextPreference
-            app:dependency="Consentimiento"
-            app:enabled="false"
-            app:key="Password"
-            app:title="@string/password"
-            app:useSimpleSummaryProvider="true"
-            app:defaultValue=" "/>
-    </PreferenceCategory>
-
-    <PreferenceCategory app:title="@string/seccion_respaldo">
-        <Preference
-            app:enabled="true"
-            app:key="Respaldo"
-            app:summary="@string/respaldo_summary"
-            app:title="@string/respaldo">
-        </Preference>
-        <Preference
-            app:enabled="true"
-            app:key="Recuperacion"
-            app:summary="@string/respaldo_recuperar_summary"
-            app:title="@string/respaldo_recuperar">
-        </Preference>
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/seccion_metodo_contacto">
+
         <ListPreference
             app:entries="@array/valores_respuesta"
             app:entryValues="@array/valores_respuesta_values"
@@ -99,24 +49,91 @@
             </EditTextPreference>
         </PreferenceCategory>
 
+        <PreferenceCategory app:title="@string/seccion_metodo_contacto_sms_titulo">
 
+            <EditTextPreference
+                app:key="NumeroTelefonoSmsDefecto"
+                app:useSimpleSummaryProvider="true"
+                app:title="@string/sms_numero_defecto">
+            </EditTextPreference>
+
+            <EditTextPreference
+                app:key="TextoSmsDefecto"
+                app:useSimpleSummaryProvider="true"
+                app:title="@string/sms_texto_defecto">
+            </EditTextPreference>
+
+            <SwitchPreference
+                app:key="Registro"
+                app:isPreferenceVisible="false"
+                app:defaultValue="true">
+            </SwitchPreference>
+        </PreferenceCategory>
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/seccion_metodo_contacto_sms_titulo">
-        <EditTextPreference
-            app:key="NumeroTelefonoSmsDefecto"
-            app:useSimpleSummaryProvider="true"
-            app:title="@string/sms_numero_defecto">
-        </EditTextPreference>
+    <PreferenceCategory app:title="@string/seccion_seguridad">
+
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="Consentimiento"
+            app:title="@string/consentimiento_string">
+
+        </SwitchPreference>
 
         <EditTextPreference
-            app:key="TextoSmsDefecto"
+            app:dependency="Consentimiento"
+            app:enabled="false"
+            app:key="Password"
+            app:title="@string/password"
             app:useSimpleSummaryProvider="true"
-            app:title="@string/sms_texto_defecto">
-        </EditTextPreference>
+            app:defaultValue=" "/>
+
+        <PreferenceScreen
+            android:key="CambioPass"
+            android:summary="@string/cambio_pass_summary"
+            android:title="@string/cambio_pass">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.example.hilfe_ultimate.ChangePass"
+                android:targetPackage="com.example.hilfe_ultimate" />
+        </PreferenceScreen>
+
     </PreferenceCategory>
 
+
+
+    <PreferenceCategory app:title="@string/seccion_respaldo">
+
+        <Preference
+            app:enabled="true"
+            app:key="Respaldo"
+            app:summary="@string/respaldo_summary"
+            app:title="@string/respaldo">
+        </Preference>
+
+        <Preference
+            app:enabled="true"
+            app:key="Recuperacion"
+            app:summary="@string/respaldo_recuperar_summary"
+            app:title="@string/respaldo_recuperar">
+        </Preference>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/contacto_desarrollador">
+
+        <PreferenceScreen
+            android:key="Soporte"
+            android:summary="Contacte con el desarrollador para consultar dudas o reportar errores."
+            android:title="Soporte">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="com.example.hilfe_ultimate.DeveloperContact"
+                android:targetPackage="com.example.hilfe_ultimate" />
+        </PreferenceScreen>
+
+    </PreferenceCategory>
 
 </PreferenceScreen>
 

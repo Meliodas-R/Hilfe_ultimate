@@ -24,10 +24,6 @@ import java.util.ArrayList;
 
 public class Ajustes extends AppCompatActivity {
 
-    public final String SHA = "SHA-1";
-    public BigInteger shaData;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,27 +56,6 @@ public class Ajustes extends AppCompatActivity {
                 MainActivity.var = 3;
                 break;
         }
-
-        String hash = preferences.getString("Password", "");
-
-        byte[] inputData = hash.getBytes();
-        byte[] outputData = new byte[0];
-        try {
-            outputData = sha.encryptSHA(inputData, SHA);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        shaData= new BigInteger(1, outputData);
-        //Toast.makeText(this, shaData.toString(), Toast.LENGTH_SHORT).show();
-
-        SharedPreferences prefs =
-                getSharedPreferences("com.example.hilfe_ultimate_preferences", Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("Password", shaData.toString());
-        editor.commit();
-
 
     }
 
@@ -132,11 +107,6 @@ public class Ajustes extends AppCompatActivity {
             } else {
                 preferencePass.setEnabled(false);
             }
-
-
-
-
-
 
         }
 

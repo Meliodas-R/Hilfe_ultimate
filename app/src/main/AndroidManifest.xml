@@ -20,14 +20,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FAQ"></activity>
+        <activity android:name=".Registro">
+
+        </activity>
+        <activity android:name=".ChangePass" />
+        <activity android:name=".FAQ" />
         <activity android:name=".Autenticacion" />
         <activity android:name=".DeveloperContact" />
         <activity android:name=".InformacionContacto" />
         <activity
             android:name=".Ajustes"
-            android:parentActivityName=".OpcionesGenerales"
-            android:label="@string/title_activity_ajustes" />
+            android:label="@string/title_activity_ajustes"
+            android:parentActivityName=".OpcionesGenerales" />
         <activity android:name=".AgregarContacto" />
         <activity android:name=".Splash">
             <intent-filter>

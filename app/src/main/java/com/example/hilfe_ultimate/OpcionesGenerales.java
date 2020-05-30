@@ -63,8 +63,8 @@ public class OpcionesGenerales extends AppCompatActivity {
     }
 
     //BETA
-    public void irMensajes(View view) {
-        Intent i = new Intent(this, DeveloperContact.class);
+    public void irFaq(View view) {
+        Intent i = new Intent(this, FAQ.class);
         startActivity(i);
     }
 }

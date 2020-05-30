@@ -24,9 +24,11 @@
     <string name="consentimiento_string">Activar funciones de autenticacion.</string>
     <string name="password">Contraseña</string>
     <string name="consentimiento_summary">Se activará la opcion contraseña.</string>
+    <string name="cambio_pass">Cambiar contraseña</string>
+    <string name="cambio_pass_summary">Cambiar contraseña sumario</string>
 
     <!--Copia de seguridad/respaldo en la nube-->
-    <string name="seccion_respaldo">Copia de seguridad/reslpaldo en la nube</string>
+    <string name="seccion_respaldo">Copia de seguridad/respaldo en la nube</string>
     <string name="respaldo">Realizar copia de seguridad</string>
     <string name="respaldo_summary">Se realizará una copia de seguridad de los datos de la aplicacion para poder recuperarlos más adelante.</string>
     <string name="respaldo_recuperar">Restaurar datos</string>

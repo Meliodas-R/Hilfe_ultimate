@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -26,7 +27,6 @@ import com.google.android.material.snackbar.Snackbar;
 public class MainActivity extends AppCompatActivity {
 
     Button panicButton;
-    //public static String numeroTelefono = "";
     public static Integer var = 3;
     public static boolean autenticacion = true;
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
