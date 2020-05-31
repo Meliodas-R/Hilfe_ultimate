@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    apply plugin: 'com.android.application'
 
     defaultConfig {
         applicationId "com.example.hilfe_ultimate"
@@ -11,6 +12,7 @@ android {
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,13 +24,23 @@ android {
         }
     }
 
-    //Si dropbox da problemas es mejor descomentar este apartado para evitar incompatibilidades.
-//    packagingOptions {
-//        exclude 'META-INF/LICENSE'
-//        exclude 'META-INF/LICENSE.txt'
-//        exclude 'META-INF/NOTICE'
-//        exclude 'META-INF/NOTICE.txt'
-//    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+
+    configurations {
+        all {
+            exclude module: 'httpclient'
+            exclude module: 'commons-logging'
+        }
+    }
 
 }
 
@@ -47,4 +59,18 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.dropbox.core:dropbox-core-sdk:2.0.1'
     implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.airbnb.android:lottie:3.4.0'
+    implementation 'org.jetbrains:annotations-java5:15.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    api 'com.google.android.gms:play-services-drive:17.0.0'
+
+    api 'com.google.http-client:google-http-client-gson:1.26.0'
+    api('com.google.api-client:google-api-client-android:1.26.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    api('com.google.apis:google-api-services-drive:v3-rev136-1.25.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    api 'commons-codec:commons-codec:1.10'
 }

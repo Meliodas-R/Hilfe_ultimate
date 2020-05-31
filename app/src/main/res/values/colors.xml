@@ -17,5 +17,12 @@
     <color name="Rojo_suave_degradado">#ed4463</color>
     <color name="Rosa_degradado">#cc3174</color>
 
+    <!--Degradado melocotón-->
+    <color name="Blanco_melocoton">#ffecd2</color>
+    <color name="Rosa_melocoton">#fcb69f</color>
+
+    <!--Degradado lady lips-->
+    <color name="Rosa_lips">#ff9a9e</color>
+    <color name="Rosa_claro_lips">#fecfef</color>
 
 </resources>

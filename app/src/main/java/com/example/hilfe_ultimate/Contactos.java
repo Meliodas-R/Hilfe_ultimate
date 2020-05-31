@@ -1,26 +1,33 @@
 package com.example.hilfe_ultimate;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-
 import java.util.ArrayList;
 
+/**
+ * Muestra todos los contactos y permite crear y agregar contactos a la base de datos.
+ *
+ */
 public class Contactos extends AppCompatActivity {
 
     ListView lvContactos;
     ArrayList<Contacto> listaContactos;
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contactos);
-        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Contactos");
         consultarListaContactos();
         lvContactos = findViewById(R.id.listViewContactos);
         ContactosListAdapter cla = new ContactosListAdapter(this, listaContactos);

@@ -13,6 +13,10 @@ import android.widget.Toast;
 
 import java.math.BigInteger;
 
+/**
+ * Pide al usuario la contraseña para acceder al sistema.
+ *
+ */
 public class Autenticacion extends AppCompatActivity {
 
     EditText etCampoPass;
@@ -20,6 +24,11 @@ public class Autenticacion extends AppCompatActivity {
     Button boton;
     private final String SHA = "SHA-1";
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +36,8 @@ public class Autenticacion extends AppCompatActivity {
         getSupportActionBar().hide();
         SharedPreferences preferenciasAutenticacion = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         passString = preferenciasAutenticacion.getString("Password", " ");
-        etCampoPass = (EditText) findViewById(R.id.etPass);
-        boton = (Button) findViewById(R.id.btnAcceder);
+        etCampoPass = findViewById(R.id.etPass);
+        boton = findViewById(R.id.btnAcceder);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         final String hash = preferences.getString("Password", "");
@@ -63,6 +72,11 @@ public class Autenticacion extends AppCompatActivity {
         });
     }
 
+    /**
+     * Regresa a la actividad anterior.
+     *
+     * @param view Representación de los elementos en pantalla.
+     */
     public void salir(View view) {
         finish();
         System.exit(0);

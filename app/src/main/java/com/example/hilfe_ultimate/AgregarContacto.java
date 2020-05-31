@@ -1,17 +1,25 @@
 package com.example.hilfe_ultimate;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Agrega un contacto a la base de datos.
+ *
+ */
 public class AgregarContacto extends AppCompatActivity {
 
     private EditText vetNombre;
     private EditText vetTelefono;
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +31,7 @@ public class AgregarContacto extends AppCompatActivity {
     }
 
     /**
-     * Método que agrega un contacto a la base de datos.
+     * Agrega un contacto a la base de datos.
      *
      * @param view Representación de los elementos en pantalla.
      */
@@ -45,15 +53,20 @@ public class AgregarContacto extends AppCompatActivity {
     }
 
     /**
-     * Método que elimina el contenido de los EditText.
+     * Elimina el contenido de los campos.
      *
-     * @param view Representacion de los elemenos en pantalla.
+     * @param view Representación de los elementos en pantalla.
      */
     public void limpiar(View view) {
         vetNombre.setText("");
         vetTelefono.setText("");
     }
 
+    /**
+     * Regresa a la pantalla anterior.
+     *
+     * @param view Representación de los elementos en pantalla.
+     */
     public void volver(View view){
         finish();
     }

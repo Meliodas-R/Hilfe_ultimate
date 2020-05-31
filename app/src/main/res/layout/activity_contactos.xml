@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/degradado_melocoton"
     tools:context=".Contactos">
 
     <ListView
         android:id="@+id/listViewContactos"
         android:layout_width="413dp"
-        android:layout_height="592dp"
+        android:layout_height="500dp"
         android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

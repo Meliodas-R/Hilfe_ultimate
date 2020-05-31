@@ -1,8 +1,6 @@
 package com.example.hilfe_ultimate;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,11 +9,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Muestra la información de un contacto.
+ *
+ */
 public class InformacionContacto extends AppCompatActivity {
 
     EditText etNombreContacto, etTelefonoContacto;
     Contacto contacto;
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,9 +92,5 @@ public class InformacionContacto extends AppCompatActivity {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("TelefonoPredeterminado", contacto.getTelefonoContacto());
         editor.commit();
-
-        //String p = contacto.getTelefonoContacto();
-        //Toast.makeText(this,  , Toast.LENGTH_SHORT).show();
-        //MainActivity.numeroTelefono = p;
     }
 }

@@ -11,11 +11,16 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 /**
- * Clase que muestra una animación al iniciar el aplicativo.
+ * Muestra una animación al iniciar el aplicativo.
  *
  */
 public class Splash extends AppCompatActivity {
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

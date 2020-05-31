@@ -3,7 +3,6 @@ package com.example.hilfe_ultimate;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -14,7 +13,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,6 +24,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/**
+ * Lanza una actividad de google maps con la que se puede interactuar.
+ *
+ */
 public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -34,6 +36,11 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
     double lat = 0.0;
     double lng = 0.0;
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +74,7 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
     }
 
     /**
-     * Método que agrega un marcador en el mapa.
+     * Agrega un marcador en el mapa.
      *
      * @param lat Latitud de la ubicación.
      * @param lng Longitud de la ubicación.
@@ -84,7 +91,7 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
     }
 
     /**
-     * Método que obtiene la ubicación del dispositivo.
+     * Obtiene la ubicación del dispositivo.
      *
      * @param location Localización actual.
      */
@@ -100,7 +107,7 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
         //Location changed se lanza cada vez que se recibe una actualizacion de la ubicación
 
         /**
-         * Método que actualiza la ubicación cuando se detecta un cambio en la misma.
+         * Actualiza la ubicación cuando se detecta un cambio en la misma.
          *
          * @param location Localización actual.
          */
@@ -126,7 +133,7 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
     };
 
     /**
-     * Método que se encarga de enviar actualizaciones de la ubicación.
+     * Envia actualizaciones de la ubicación.
      *
      */
     private void miUbicacion() {
@@ -141,9 +148,9 @@ public class Ubicacion extends FragmentActivity implements OnMapReadyCallback {
     }
 
     /**
-     * Método que convierte un recurso en un BitMap.
+     * Convierte un recurso en un BitMap.
      *
-     * @param context Contexto.
+     * @param context Contexto del método.
      * @param vectorResId Recurso que será transformado a BitMap.
      * @return
      */

@@ -4,28 +4,48 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 
+/**
+ * Componente de acceso a datos.
+ *
+ */
 public class ContactoBD {
 
     private SQLiteDatabase bd;
     private AdminSQLiteOpenHelper admin;
 
+    /**
+     *
+     *
+     * @param context Contexto de la actividad.
+     */
     public ContactoBD(Context context) {
         admin = new AdminSQLiteOpenHelper(context, "bd", null, 1);
     }
 
+    /**
+     * Abre la base de datos para poder interactuar con ella.
+     *
+     */
     public void abrirBD(){
         bd = admin.getWritableDatabase();
     }
 
+    /**
+     * Cierra la base de datos y termina la interaccion con ella.
+     *
+     */
     public void cerrarBD(){
         bd.close();
     }
 
+    /**
+     * Agrega un contacto a la base de datos.
+     *
+     * @param contacto Objeto contacto que contiene todos sus atributos.
+     * @return Registros insertados.
+     */
     public long agregarContacto(Contacto contacto){
         abrirBD();
         long registro=0;
@@ -39,6 +59,11 @@ public class ContactoBD {
         return registro;
     }
 
+    /**
+     * Lista todos los contactos que hay en la base de datos.
+     *
+     * @return Listado de contactos.
+     */
     public ArrayList<Contacto> listarContactos(){
         abrirBD();
         ArrayList<Contacto> listaContactos=new ArrayList<Contacto>();
@@ -62,10 +87,10 @@ public class ContactoBD {
     }
 
     /**
-     * Método que elimina un contacto.
+     * Elimina un contacto de la base de datos.
      *
      * @param id Identificador del contacto.
-     * @return Número de registros eliminados.
+     * @return Registros eliminados.
      */
     public long eliminarContacto(Integer id){
         abrirBD();
@@ -76,10 +101,10 @@ public class ContactoBD {
     }
 
     /**
-     * Método que modifica un contacto.
+     * Modifica un contacto de la base de datos.
      *
      * @param id Identificador del elemento.
-     * @return Número de registros modificados.
+     * @return Registros modificados.
      */
     public long modificarContacto(Contacto contacto, Integer id){
         abrirBD();

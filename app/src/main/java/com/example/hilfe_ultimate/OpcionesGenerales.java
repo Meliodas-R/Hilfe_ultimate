@@ -2,18 +2,25 @@ package com.example.hilfe_ultimate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+/**
+ * Muestra una serie de botones que llevan a otras pantallas.
+ *
+ */
 public class OpcionesGenerales extends AppCompatActivity {
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +29,7 @@ public class OpcionesGenerales extends AppCompatActivity {
     }
 
     /**
-     * Método que lanza la actividad contactos.
+     * Lanza la actividad contactos.
      *
      * @param view Representación de la actividad contactos en pantalla.
      */
@@ -32,7 +39,7 @@ public class OpcionesGenerales extends AppCompatActivity {
     }
 
     /**
-     * Método que lanza la actividad ubicación.
+     * Lanza la actividad ubicación.
      *
      * @param view Representación de la actividad ubicación en pantalla.
      */
@@ -42,7 +49,7 @@ public class OpcionesGenerales extends AppCompatActivity {
     }
 
     /**
-     * Método que lanza la actividad ajustes.
+     * Lanza la actividad ajustes.
      *
      * @param view Representación de la actividad ajustes en pantalla.
      */
@@ -52,7 +59,7 @@ public class OpcionesGenerales extends AppCompatActivity {
     }
 
     /**
-     * Método que termina la actividad actual y regresa a la anterior.
+     * Termina la actividad actual y regresa a la anterior.
      *
      * @param view Representación de la actividad ajustes generales en pantalla.
      */
@@ -62,7 +69,11 @@ public class OpcionesGenerales extends AppCompatActivity {
         startActivity(i);
     }
 
-    //BETA
+    /**
+     * Lanza la actividad FAQ.
+     *
+     * @param view Representación de la actividad FAQ en pantalla.
+     */
     public void irFaq(View view) {
         Intent i = new Intent(this, FAQ.class);
         startActivity(i);

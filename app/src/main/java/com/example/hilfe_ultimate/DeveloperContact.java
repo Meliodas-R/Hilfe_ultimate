@@ -9,16 +9,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Permite contactar con el desarrollador de la aplicación.
+ *
+ */
 public class DeveloperContact extends AppCompatActivity {
 
     EditText etDestinatario, etAsunto, etMensaje;
     Button btnEnviar;
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_developer_contact);
-        getSupportActionBar().hide();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Contactos");
 
         etDestinatario = findViewById(R.id.etDestinatario);
         etAsunto = findViewById(R.id.etAsunto);

@@ -10,7 +10,8 @@
     <string name="seccion_datos_personales">Datos personales</string>
     <string name="nombre_usuario">Nombre</string>
     <string name="apellido_usuario">Apellido</string>
-    <string name="direccion_usuario">Direccion</string>
+    <string name="usar_datos_personales">Usar datos personales</string>
+    <string name="usar_datos_personales_summary">Enviar por correo o SMS estos datos para facilitar a los servicios de emergencia su busqueda e identificacion.</string>
 
     <!--Seccion preferencias de tema-->
     <string name="seccion_preferencias_tema">Preferencias de tema</string>
@@ -56,13 +57,13 @@
     <!--FAQ-->
     <string name="FAQ_Q1">Q: ¿Puedo ponerme en contacto con el desarrollador para reportar bugs o consultar dudas respecto a la app?</string>
     <string name="FAQ_A1">A: Si, en el apartado de ajustes encontrarás una opción (Contacto con el desarrollador).</string>
-    <string name="FAQ_Q2">¿Se pueden realizar varias acciones al pulsar el botón? Por ejemplo, que envie un e-mail y luego llame al teléfono indicado.</string>
-    <string name="FAQ_A2">Es una opción que estoy pensando en introducir en la aplicacion, pero por el momento no es posible.</string>
-    <string name="FAQ_Q3">¿Cómo puedo hacer una copia de seguridad de mis contactos?</string>
-    <string name="FAQ_A3">Sencillo, en el apartado de ajustes hay una opción llamada (Realizar copia de seguridad). Una vez ahi, pulsamos sobre ella
+    <string name="FAQ_Q2">Q: ¿Se pueden realizar varias acciones al pulsar el botón? Por ejemplo, que envie un e-mail y luego llame al teléfono indicado.</string>
+    <string name="FAQ_A2">A: Es una opción que estoy pensando en introducir en la aplicacion, pero por el momento no es posible.</string>
+    <string name="FAQ_Q3">Q: ¿Cómo puedo hacer una copia de seguridad de mis contactos?</string>
+    <string name="FAQ_A3">A: Sencillo, en el apartado de ajustes hay una opción llamada (Realizar copia de seguridad). Una vez ahi, pulsamos sobre ella
         y nos preguntará si queremos hacer el respaldo, le decimos que si y ya estaría hecha la copia.</string>
-    <string name="FAQ_Q4">¿Dónde puedo establecer un número de teléfono por defecto?</string>
-    <string name="FAQ_A4">En el apartado de contactos, pulsas sobre el contacto que quieras establecer como predeterminado y aparecerá una ventana donde veras un botón llamado (Establecer como predeterminado).</string>
+    <string name="FAQ_Q4">Q: ¿Dónde puedo establecer un número de teléfono por defecto?</string>
+    <string name="FAQ_A4">A: En el apartado de contactos, pulsas sobre el contacto que quieras establecer como predeterminado y aparecerá una ventana donde veras un botón llamado (Establecer como predeterminado).</string>
 
 
 </resources>

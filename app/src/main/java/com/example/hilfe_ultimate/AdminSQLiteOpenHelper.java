@@ -1,6 +1,5 @@
 package com.example.hilfe_ultimate;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 /**
- * Clase que nos permite crear la base de datos y actualizar la estructura de tablas y datos
+ * Permite crear la base de datos y actualizar la estructura de tablas y datos
  * iniciales.
  */
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
@@ -26,7 +25,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Método que define la estructura de las tablas y crea la base de datos.
+     * Define la estructura de las tablas y crea la base de datos.
      *
      * @param db Nombre de la base de datos.
      */
@@ -43,7 +42,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Método que actualiza la base de datos.
+     * Actualiza la base de datos.
      *
      * @param db         Nombre de la base de datos.
      * @param oldVersion Versión antigua de la base de datos.

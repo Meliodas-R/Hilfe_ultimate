@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         pedirPermisos();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
         final String correoDefectoString = preferences.getString("CorreoDefecto", "");
         final String asuntoDefectoString = preferences.getString("CorreoAsunto", "");
@@ -60,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
         eleccionContacto(sync);
 
         final String numeroTelefono = preferences.getString("TelefonoPredeterminado", "");
-        Toast.makeText(this, numeroTelefono, Toast.LENGTH_SHORT).show();
+
+        final String datoNombre = preferences.getString("Nombre","");
+        final String datoApellido = preferences.getString("Apellido","");
 
 
 
@@ -71,9 +73,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (var == 1) {
+                    boolean usarDatos = preferences.getBoolean("UsarDatos",false);
+                    if(usarDatos){
+                        enviarMensaje(telefono, mensaje + " " + "Mi nombre y apellido es: " + datoNombre + " " + datoApellido);
+                    }
                     enviarMensaje(telefono, mensaje);
                 }
                 if (var == 2) {
+                    boolean usarDatos = preferences.getBoolean("UsarDatos",false);
+                    if(usarDatos){
+                        enviarCorreo(correoDefectoString, asuntoDefectoString, cuerpoDefectoString + " " + "Mi nombre y apellido es: " + datoNombre + " " + datoApellido);
+                    }
                     enviarCorreo(correoDefectoString, asuntoDefectoString, cuerpoDefectoString);
                 }
                 if (var == 3) {
@@ -87,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     /**
-     * Método que permite al usuario desplazarse a la ventana de opciones.
+     * Permite al usuario desplazarse a la ventana de opciones.
      *
      * @param view Representación en pantalla de los elementos pertenecientes a la vista de
      *             opciones generales.
@@ -100,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que cierra la aplicación.
+     * Cierra la aplicación.
      *
      * @param view Representación en pantalla de los elementos.
      */
@@ -110,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que realiza el envío de un mensaje SMS.
+     * Envía un mensaje SMS.
      *
      * @param numero  Número de teléfono al que se envía el SMS.
      * @param mensaje Texto que es enviado.
@@ -128,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que envia un correo electrónico.
+     * Envía un correo electrónico.
      *
      * @param destinatario Correo electrónico al que enviar el mensaje.
      * @param asunto       Asunto del correo.
@@ -143,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que realiza una llamada telefónica.
+     * Realiza una llamada telefónica.
      *
      * @param numero Número de teléfono al que contactar.
      */
@@ -156,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Método que realiza la petición de todos los permisos necesarios para que la app funcione.
+     * Petición de todos los permisos necesarios para que la app funcione.
      */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void pedirPermisos() {
@@ -185,9 +195,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Detecta el método de contacto seleccionado.
      *
-     *
-     * @param sync
+     * @param sync Recoge el valor de la lista de elección de método contacto.
      */
     private void eleccionContacto(String sync){
 

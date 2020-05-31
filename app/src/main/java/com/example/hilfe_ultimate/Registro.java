@@ -1,8 +1,6 @@
 package com.example.hilfe_ultimate;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,15 +8,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import java.math.BigInteger;
 
+/**
+ * Permite al usuario registrarse en la aplicación introduciendo una contraseña.
+ *
+ */
 public class Registro extends AppCompatActivity {
 
     EditText pass1;
     EditText pass2;
     private final String SHA = "SHA-1";
 
+    /**
+     * Inicia la actividad, llama al constructor de la clase padre y se establece el xml.
+     *
+     * @param savedInstanceState Contiene los datos mas recientes de la actividad.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +34,11 @@ public class Registro extends AppCompatActivity {
 
     }
 
+    /**
+     * Permite registrarse con una contraseña que después es hasheada.
+     *
+     * @param view Representación en pantalla de los elementos.
+     */
     public void registrarse(View view){
         BigInteger shaData;
 

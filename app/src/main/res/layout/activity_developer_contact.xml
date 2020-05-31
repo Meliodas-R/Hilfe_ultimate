@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/degradado_melocoton"
     android:gravity="center"
+    android:orientation="vertical"
     android:padding="20dp"
     tools:context=".DeveloperContact">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:background="@drawable/bg_round">
-        
+        android:background="@drawable/bg_round"
+        android:padding="10dp">
+
         <TextView
             android:layout_width="50dp"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Para"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/etDestinatario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/etDestinatario"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent" />
 
     </LinearLayout>
 
     <EditText
+        android:id="@+id/etAsunto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etAsunto"
-        android:hint="Asunto"
-        android:padding="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_round"/>
+        android:background="@drawable/bg_round"
+        android:hint="Asunto"
+        android:padding="10dp" />
 
     <EditText
+        android:id="@+id/etMensaje"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/etMensaje"
-        android:hint="Mensaje"
-        android:padding="10dp"
-        android:gravity="top"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_round"/>
+        android:layout_weight="1"
+        android:background="@drawable/bg_round"
+        android:gravity="top"
+        android:hint="Mensaje"
+        android:padding="10dp" />
 
     <Button
         android:id="@+id/btnEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_round"
+        android:padding="10dp"
         android:text="Enviar"
         android:textColor="@color/Gris_oscuro"
-        android:textSize="25sp"
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/bg_round"/>
+        android:textSize="25sp" />
 
 </LinearLayout>
