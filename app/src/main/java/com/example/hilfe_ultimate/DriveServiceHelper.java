@@ -111,7 +111,7 @@ public class DriveServiceHelper {
                         .setFields("files(id, name,size,createdTime,modifiedTime,starred)")
                         .execute();
 
-                if (result != null) {
+                if (!result.isEmpty()) {
                     for (int i = 0; i < result.getFiles().size(); i++) {
                         GoogleDriveFileHolder googleDriveFileHolder = new GoogleDriveFileHolder();
                         googleDriveFileHolder.setId(result.getFiles().get(i).getId());

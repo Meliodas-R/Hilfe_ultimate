@@ -35,13 +35,6 @@ android {
         exclude 'META-INF/ASL2.0'
     }
 
-    configurations {
-        all {
-            exclude module: 'httpclient'
-            exclude module: 'commons-logging'
-        }
-    }
-
 }
 
 dependencies {
