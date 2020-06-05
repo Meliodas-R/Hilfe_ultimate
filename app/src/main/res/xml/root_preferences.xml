@@ -89,7 +89,7 @@
             app:enabled="false"
             app:key="Password"
             app:title="@string/password"
-            app:useSimpleSummaryProvider="true"
+            app:isPreferenceVisible="false"
             app:defaultValue=" "/>
 
         <PreferenceScreen

@@ -34,9 +34,6 @@
             android:name=".DeveloperContact"
             android:parentActivityName=".Ajustes" />
         <activity android:name=".InformacionContacto" />
-        <activity android:name=".CopiaSeguridad">
-
-        </activity>
         <activity
             android:name=".Ajustes"
             android:label="@string/title_activity_ajustes"

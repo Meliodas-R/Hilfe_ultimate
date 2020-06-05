@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -109,7 +108,7 @@ public class Ajustes extends AppCompatActivity {
             Preference preferenciaCopiaSeguridad = (Preference) findPreference("Respaldo");
             preferenciaCopiaSeguridad.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 public boolean onPreferenceClick(final Preference preference) {
-                    pedirCredenciales();
+                    iniciarSesion();
                     mostrarDialogoCopia();
                     return false;
                 }
@@ -120,7 +119,7 @@ public class Ajustes extends AppCompatActivity {
             Preference preferenciaRespaldo = (Preference) findPreference("Recuperacion");
             preferenciaRespaldo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 public boolean onPreferenceClick(final Preference preference) {
-                    pedirCredenciales();
+                    iniciarSesion();
                     mostrarDialogoRestaurar();
                     return false;
                 }
@@ -140,21 +139,35 @@ public class Ajustes extends AppCompatActivity {
 
         }
 
-        private void pedirCredenciales() {
+        /**
+         * Pide al usuario autenticarse mediante su cuenta de Google, en caso de que no haya
+         * iniciado sesión.
+         *
+         */
+        private void iniciarSesion() {
             GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getActivity());
             if (account == null) {
-                signIn();
+                registrarse();
             } else {
                 mDriveServiceHelper = new DriveServiceHelper(getGoogleDriveService(getActivity(), account, "appName"));
             }
         }
 
-        private void signIn() {
+        /**
+         * Inicia sesión con la cuenta de Google seleccionada.
+         *
+         */
+        private void registrarse() {
 
             mGoogleSignInClient = buildGoogleSignInClient();
             startActivityForResult(mGoogleSignInClient.getSignInIntent(), REQUEST_CODE_SIGN_IN);
         }
 
+        /**
+         * Muestra la ventana de inicio de sesion con los correos.
+         *
+         * @return
+         */
         private GoogleSignInClient buildGoogleSignInClient() {
             GoogleSignInOptions signInOptions =
                     new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -164,6 +177,13 @@ public class Ajustes extends AppCompatActivity {
             return GoogleSignIn.getClient(getActivity(), signInOptions);
         }
 
+        /**
+         * Lee la cuenta con la que el usuario quiere hacer la copia de seguridad.
+         *
+         * @param requestCode
+         * @param resultCode
+         * @param resultData
+         */
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
             switch (requestCode) {
@@ -172,17 +192,16 @@ public class Ajustes extends AppCompatActivity {
                         handleSignInResult(resultData);
                     }
                     break;
-
-
             }
 
             super.onActivityResult(requestCode, resultCode, resultData);
         }
 
-        public void test() {
-            System.out.println("test");
-        }
-
+        /**
+         * Maneja la cuenta con la que se inicia sesión.
+         *
+         * @param result Llama a otra actividad.
+         */
         private void handleSignInResult(Intent result) {
             GoogleSignIn.getSignedInAccountFromIntent(result)
                     .addOnSuccessListener(new OnSuccessListener<GoogleSignInAccount>() {
@@ -202,13 +221,18 @@ public class Ajustes extends AppCompatActivity {
                     });
         }
 
+        /**
+         * Muestra el diálogo de la copia de seguridad. (Similar a JOPtionPane)
+         *
+         */
         private void mostrarDialogoCopia(){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("¿Desea realizar una copia de seguridad?.")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @RequiresApi(api = Build.VERSION_CODES.O)
                         public void onClick(DialogInterface dialog, int id) {
-                            exportDatabase();
+                            exportarBDD();
+                            Toast.makeText(getActivity(), "Los datos han sido respaldados.", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -219,13 +243,18 @@ public class Ajustes extends AppCompatActivity {
             builder.show();
         }
 
+        /**
+         * Muestra el diálogo restaurar la copia de seguridad. (Similar a JOPtionPane)
+         *
+         */
         private void mostrarDialogoRestaurar(){
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage("¿Desea restaurar la copia de seguridad?.")
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @RequiresApi(api = Build.VERSION_CODES.O)
                         public void onClick(DialogInterface dialog, int id) {
-                            importDatabase();
+                            importarBDD();
+                            Toast.makeText(getActivity(), "Los datos han sido restaurados.", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -236,15 +265,16 @@ public class Ajustes extends AppCompatActivity {
             builder.show();
         }
 
+        /**
+         * Sube el archivo de base de datos a Google Drive.
+         *
+         */
         @RequiresApi(api = Build.VERSION_CODES.O)
-        public void exportDatabase() {
+        public void exportarBDD() {
             if (mDriveServiceHelper == null) {
                 return;
             }
-
-            File archivoBD = new File("/data/data/com.example.hilfe_ultimate/databases/bd");
-            File archivoBD2 = new File("/data/data/com.example.hilfe_ultimate/databases/bd");
-
+            //Se comprueba si hay un fichero de copia de seguridad en la nube Google Drive
             mDriveServiceHelper.searchFile("bd", "application/octet-stream")
                     .addOnSuccessListener(new OnSuccessListener<List<GoogleDriveFileHolder>>() {
                         @Override
@@ -252,9 +282,7 @@ public class Ajustes extends AppCompatActivity {
                             if (googleDriveFileHolders == null) {
                                 GoogleDriveFileHolder googleDriveFileHolder = googleDriveFileHolders.get(0);
                                 idFile = googleDriveFileHolder.getId();
-                                Toast.makeText(getActivity(), "Se ha realizado una copia de seguridad", Toast.LENGTH_SHORT).show();
                             }
-                            Log.d(TAG, "onSuccess2: " + idFile);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -276,25 +304,27 @@ public class Ajustes extends AppCompatActivity {
             });
 
 
-            mDriveServiceHelper.uploadFile(new java.io.File("/data/data/com.example.hilfe_ultimate/databases/", "bd"), "application/octet-stream", null)
+            mDriveServiceHelper.uploadFile(new File("/data/data/com.example.hilfe_ultimate/databases/", "bd"), "application/octet-stream", null)
                     .addOnSuccessListener(new OnSuccessListener<GoogleDriveFileHolder>() {
                         @Override
                         public void onSuccess(GoogleDriveFileHolder googleDriveFileHolder) {
-                            Gson gson = new Gson();
-                            Log.d(TAG, "onSuccess: " + gson.toJson(googleDriveFileHolder));
                             idFile = googleDriveFileHolder.getId();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "onFailure: " + e.getMessage());
+                            Toast.makeText(getActivity(), "No se ha podido subir el archivo.", Toast.LENGTH_SHORT).show();
                         }
                     });
         }
 
+        /**
+         * Descarga e importa el fichero de base de datos subido a Google Drive.
+         *
+         */
         @RequiresApi(api = Build.VERSION_CODES.O)
-        public void importDatabase() {
+        public void importarBDD() {
             if (mDriveServiceHelper == null) {
                 return;
             }
@@ -302,41 +332,34 @@ public class Ajustes extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<List<GoogleDriveFileHolder>>() {
                         @Override
                         public void onSuccess(List<GoogleDriveFileHolder> googleDriveFileHolders) {
-                            Gson gson = new Gson();
                             GoogleDriveFileHolder googleDriveFileHolder = googleDriveFileHolders.get(0);
                             idFile = googleDriveFileHolder.getId();
                             Log.d("TAG 3", "" + idFile);
 
                             File dir = new File("/data/data/com.example.hilfe_ultimate/databases");
                             if (dir.isDirectory()) {
-                                //obtiene un listado de los archivos contenidos en el directorio.
-                                String[] hijos = dir.list();
-                                //Elimina los archivos contenidos.
-                                for (int i = 0; i < hijos.length; i++) {
-                                    new File(dir, hijos[i]).delete();
+                                String[] archivos = dir.list();
+                                for (int i = 0; i < archivos.length; i++) {
+                                    new File(dir, archivos[i]).delete();
                                 }
-                                Log.d("TAG", "Archivo Database Borrado");
-                                File ficheroDatabase = new File("/data/data/com.example.hilfe_ultimate/databases/bd");
+                                File archivoBDD = new File("/data/data/com.example.hilfe_ultimate/databases/bd");
                                 try {
-                                    ficheroDatabase.createNewFile();
-                                    Log.d("TAG", "Archivo Database Creado");
+                                    archivoBDD.createNewFile();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
                             }
 
-                            Log.d("Id file", "" + idFile);
                             mDriveServiceHelper.downloadFile(new File("/data/data/com.example.hilfe_ultimate/databases/", "bd"), "" + idFile + "")
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "onSuccesDownload: ");
                                             Toast.makeText(getActivity(), "Los datos han sido restaurados.", Toast.LENGTH_SHORT).show();
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "onFailure: " + e.getMessage());
+                                    Toast.makeText(getActivity(), "Ha habido un problema descargando el archivo de respaldo.", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }

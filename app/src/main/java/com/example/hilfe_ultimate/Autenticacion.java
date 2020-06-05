@@ -51,7 +51,7 @@ public class Autenticacion extends AppCompatActivity {
                     byte[] inputData = etCampoPass.getText().toString().getBytes();
                     byte[] outputData = new byte[0];
                     try {
-                        outputData = sha.encryptSHA(inputData, SHA);
+                        outputData = Hash.encryptSHA(inputData, SHA);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

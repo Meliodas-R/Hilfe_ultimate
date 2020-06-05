@@ -49,7 +49,7 @@ public class ChangePass extends AppCompatActivity {
         byte[] inputData = oldPass.getText().toString().getBytes();
         byte[] outputData = new byte[0];
         try {
-            outputData = sha.encryptSHA(inputData, SHA);
+            outputData = Hash.encryptSHA(inputData, SHA);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,7 +65,7 @@ public class ChangePass extends AppCompatActivity {
                     inputData = newPass.getText().toString().getBytes();
                     outputData = new byte[0];
                     try {
-                        outputData = sha.encryptSHA(inputData, SHA);
+                        outputData = Hash.encryptSHA(inputData, SHA);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

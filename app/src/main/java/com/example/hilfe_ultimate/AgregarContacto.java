@@ -1,6 +1,8 @@
 package com.example.hilfe_ultimate;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -69,5 +71,7 @@ public class AgregarContacto extends AppCompatActivity {
      */
     public void volver(View view){
         finish();
+        Intent i = new Intent(this, Contactos.class);
+        startActivity(i);
     }
 }

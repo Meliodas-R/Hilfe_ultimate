@@ -64,18 +64,7 @@ public class Contactos extends AppCompatActivity {
     public void irAgregar(View view) {
         Intent i = new Intent(this, AgregarContacto.class);
         startActivity(i);
-    }
-
-    /**
-     * Refresca/actualiza la actividad actual.
-     *
-     * @param view Representación actualizada de la actividad Contactos.
-     */
-    public void refrescar(View view) {
         finish();
-        overridePendingTransition(0, 0);
-        startActivity(getIntent());
-        overridePendingTransition(0, 0);
     }
 
 

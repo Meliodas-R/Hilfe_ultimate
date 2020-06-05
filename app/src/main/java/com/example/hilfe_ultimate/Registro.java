@@ -49,7 +49,7 @@ public class Registro extends AppCompatActivity {
                 byte[] inputData = pass1.getText().toString().getBytes();
                 byte[] outputData = new byte[0];
                 try {
-                    outputData = sha.encryptSHA(inputData, SHA);
+                    outputData = Hash.encryptSHA(inputData, SHA);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
